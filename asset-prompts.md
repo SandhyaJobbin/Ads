@@ -1,8 +1,8 @@
-# Asset Generation Prompts — AdSentinel Hiring Assessment Demo
+# Asset Generation Prompts — AdSentinel Edge-Case Assessment
 
 Use these prompts to generate real media assets, then drop them into `C:\My-workspace\Projects\Work\Goog\demo\assets\` and I'll wire them into the demo (replacing the current CSS/SVG mocks).
 
-All assets are **fictional demo brands** for an RFP. Real drug names (`semaglutide`) appear only as illustrative policy triggers — swap to fictional names if the demo goes external.
+All assets are **fictional demo brands** for practice. Real drug names (`semaglutide`) appear only as illustrative policy triggers — swap to fictional names if the demo goes external.
 
 ---
 

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AdSentinel · Ads Creative Edge-Case Hiring Assessment</title>
-<meta name="description" content="Ads Creative Edge-Case Hiring Assessment — RFP demo.">
+<title>AdSentinel · Ads Creative Edge-Case Assessment</title>
+<meta name="description" content="Ads Creative Edge-Case Assessment — practice judging ad creatives against policy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -235,8 +235,8 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 
 <div class="topbar">
   <div class="logo">AS</div>
-  <div class="brand">AdSentinel<small>Ads Creative Edge-Case · Hiring Assessment</small></div>
-  <div class="demo-ribbon">RFP Demo</div>
+  <div class="brand">AdSentinel<small>Ads Creative Edge-Case Assessment</small></div>
+  <div class="demo-ribbon">Practice</div>
 </div>
 
 <div class="wrap">
@@ -250,9 +250,9 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
   <!-- ================= OVERVIEW ================= -->
   <section class="panel active" id="p-overview">
     <div class="hero">
-      <div class="eyebrow">Hiring Assessment · Edge Cases</div>
-      <h1>Hire for <span class="grad">judgment</span>,<br>not throughput.</h1>
-      <p>The risk engine labels over 99% of creatives. Every ad a human reviewer sees is one the rules did not clearly anticipate. This assessment screens for the eight skills that settle those edge cases — with a work sample, not a resume line.</p>
+      <div class="eyebrow">Ads Creative Edge Cases · Practice</div>
+      <h1>Build the <span class="grad">judgment</span><br>the rules miss.</h1>
+      <p>The risk engine labels over 99% of creatives automatically. The rest — the edge cases — are where human judgment matters. This assessment puts you in the reviewer's seat: six sample ads, each hiding something the rules didn't anticipate, scored against the eight skills that settle them.</p>
       <div class="metrics">
         <div class="m"><b>8</b><span>skills screened</span></div>
         <div class="m"><b>6</b><span>work samples</span></div>
@@ -261,15 +261,15 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
     </div>
 
     <div class="card" style="margin-top:16px">
-      <h2>The eight skills we screen for</h2>
-      <p class="sub">Each is tested with a work sample — not a resume line.</p>
+      <h2>The eight skills you'll practice</h2>
+      <p class="sub">Each skill shows up in at least one sample — watch for them as you go.</p>
       <div class="sgrid" id="skill-grid"></div>
     </div>
 
     <div class="card">
       <h2>How scoring works</h2>
       <p class="sub">Every sample maps to one to three skills. A correct call earns the sample's skill points; the final report shows proficiency per skill (points earned ÷ points available).</p>
-      <div class="illustrative"><b class="tag">Illustrative</b>Policy rules shown in this demo are condensed for the RFP and are <b>not Google's verbatim policy text</b>. Scenarios are grounded in the uploaded scope, hiring-profile and workflow documents.</div>
+      <div class="illustrative"><b class="tag">Illustrative</b>Policy rules shown here are condensed and illustrative — <b>not Google's verbatim policy text</b>. Scenarios are practice cases, not live reviews.</div>
       <div class="row" style="margin-top:14px">
         <button class="btn primary" onclick="go('assessment')">Begin the assessment →</button>
       </div>
@@ -299,12 +299,12 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
       <div id="skill-bars"></div>
     </div>
     <div class="card">
-      <h2>Resilience — job preview</h2>
+      <h2>Resilience — the reality of the job</h2>
       <div class="resilience">
-        <p style="margin-top:0">This role includes reviewing graphic or adult material. We cap exposure and rotate reviewers off such queues. Are you prepared to handle that responsibly, using rotation and breaks?</p>
+        <p style="margin-top:0">The job includes reviewing graphic or adult material. Exposure is capped and reviewers rotate off such queues. Are you prepared to handle that responsibly, using rotation and breaks?</p>
         <div class="opt" data-r="1" onclick="pickRes(this)"><span class="k">A</span>Yes — I understand and am prepared.</div>
         <div class="opt" data-r="0" onclick="pickRes(this)"><span class="k">B</span>No — I would prefer a role without graphic/adult material.</div>
-        <p class="sub" style="margin:10px 0 0">This is a realistic job preview, not a scored multiple-choice. Acknowledging counts toward the Resilience skill.</p>
+        <p class="sub" style="margin:10px 0 0">This is a realistic preview of the job, not a scored question. Acknowledging it counts toward the Resilience skill.</p>
       </div>
     </div>
     <div class="card answerkey">
@@ -314,9 +314,9 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
   </section>
 
   <div class="footer">
-    <b>AdSentinel · Ads Creative Edge-Case Hiring Assessment — RFP demo.</b><br>
-    All policy rules are <b>illustrative and condensed for this demo</b>; they are not Google's verbatim policy text.
-    Scenarios are grounded in the uploaded documents: <i>Scope, Sub-Verticals and Policies</i> · <i>Hiring Profile Reviewers for Ads Creative Edge Cases</i> · <i>Policy Enforcement Workflows</i>.
+    <b>AdSentinel · Ads Creative Edge-Case Assessment.</b><br>
+    All policy rules are <b>illustrative and condensed</b>; they are not Google's verbatim policy text.
+    Scenarios are practice cases, not live reviews.
   </div>
 </div>
 
@@ -400,7 +400,7 @@ var SAMPLES = [
       {t:'There is no violation.',c:false}
     ],
     rationale:'The key claim is spoken, not shown — the canonical multimodal-reading test. Because it runs in three countries, regional/regulatory fluency decides each verdict separately.',
-    secondary:{label:'Self-check — verdict per country', model:'United States — Disapproved (semaglutide is a prescription drug, no certification shown). Brazil — Disapproved (regulatory rules differ; no local certification shown). India — Disapproved (Rx-only drug; no license shown). In each case a reviewer would request the certificate before finalizing. (Countries are illustrative for the demo.)'},
+    secondary:{label:'Self-check — verdict per country', model:'United States — Disapproved (semaglutide is a prescription drug, no certification shown). Brazil — Disapproved (regulatory rules differ; no local certification shown). India — Disapproved (Rx-only drug; no license shown). In each case a reviewer would request the certificate before finalizing. (Countries are illustrative.)'},
     render:'<div class="player">'
       +'<div class="screen"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="360" fill="#1c2a3a"/><circle cx="320" cy="150" r="78" fill="#2c3e52"/><circle cx="320" cy="150" r="78" fill="none" stroke="#3f5872"/><circle cx="320" cy="135" r="46" fill="#e7c9a9"/><path d="M296 135 q24 -30 48 0 l-48 30 0 -30 z" fill="#5b3a29"/><rect x="280" y="150" width="80" height="58" rx="10" fill="#f6f9fc"/><path d="M320 156 v14 M320 170 v12" stroke="#1a73e8" stroke-width="3"/></svg>'
       +'<div class="caption">Book an online doctor visit — most insurance accepted.</div></div>'

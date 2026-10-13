@@ -1,6 +1,6 @@
-# Ads Creative Edge-Case Hiring Assessment — Interactive Demo
+# Ads Creative Edge-Case Assessment — Interactive Practice
 
-An interactive demo of a **Google Ads Creative Edge-Case Hiring Assessment** reviewer experience, built for an RFP.
+An interactive practice assessment for reviewing **Google Ads Creative Edge Cases** — put yourself in the reviewer's seat and get scored on eight skills.
 
 > **Illustrative only.** The 6 sample ads, policy rules, and scoring shown here are illustrative examples used to demonstrate the assessment experience — not production Google Ads policy.
 
