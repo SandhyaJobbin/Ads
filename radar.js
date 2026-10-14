@@ -1,13 +1,13 @@
-/* ================= RADAR — 8-axis spider chart (Results) =================
+/* ================= RADAR — 7-axis spider chart (Results) =================
  * Owns #skill-radar: grid lives in index.html, this module draws the
- * 8 spokes + short labels + live percentages, and redraws #radar-poly
+ * 7 spokes + short labels + live percentages, and redraws #radar-poly
  * whenever script.js dispatches a `scores-updated` event.
  */
 (function(){
-  var ORDER = ['s1','s2','s3','s4','s5','s6','s7','s8'];
+  var ORDER = ['s1','s2','s3','s4','s5','s6','s7'];
   var LABELS = {
     s1:'Policy', s2:'Multimodal', s3:'Adversarial', s4:'Regional',
-    s5:'Evidence', s6:'Escalation', s7:'AI literacy', s8:'Resilience'
+    s5:'Evidence', s6:'Escalation', s7:'AI literacy'
   };
   var CX = 180, CY = 180, R = 110, LBL = 126;
   var NS = 'http://www.w3.org/2000/svg';
@@ -24,7 +24,7 @@
     + '#radar-axes .ax-pct{fill:var(--blue-d);font-size:11.5px;font-weight:700;font-family:"JetBrains Mono",monospace}';
   document.head.appendChild(style);
 
-  function angleFor(i){ return -Math.PI/2 + i*(Math.PI/4); } // i=0 at 12 o'clock, clockwise
+  function angleFor(i){ return -Math.PI/2 + i*(2*Math.PI/7); } // i=0 at 12 o'clock, clockwise
 
   function buildAxes(svg){
     var old = svg.querySelector('#radar-axes');
@@ -42,7 +42,7 @@
 
       var lx = CX+Math.cos(a)*LBL;
       var ly = CY+Math.sin(a)*LBL;
-      var anchor = (i===0 || i===4) ? 'middle' : (i<4 ? 'start' : 'end');
+      var anchor = i===0 ? 'middle' : (i<3.5 ? 'start' : 'end');
 
       var name = document.createElementNS(NS,'text');
       name.setAttribute('class','ax-name');

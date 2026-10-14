@@ -1,6 +1,6 @@
 /* ================= AdSentinel — core demo logic =================
  * Classic script (loaded with defer). Defines globals used by inline
- * onclick handlers in index.html: go, nav, submit, pickRes.
+ * onclick handlers in index.html: go, nav, submit.
  * Recovered from commit 265b4b8f (the last working inline script) and
  * extended with the loupe trigger + radar score event.
  * ================= DATA ================= */
@@ -11,8 +11,7 @@ var SKILLS = [
   {id:'s4', name:'Regional & regulatory fluency', d:'Knows one ad can be fine in one country and not another, and how licenses change the answer.'},
   {id:'s5', name:'Evidence-based writing', d:'Writes a reply that says what is missing and what is not, in plain words.'},
   {id:'s6', name:'Calibrated escalation', d:'Knows when to decide, when to ask, and when a case exposes a policy gap.'},
-  {id:'s7', name:'AI literacy', d:'Reads engine outputs, spots repeat false positives, writes labeled examples that help retraining.'},
-  {id:'s8', name:'Resilience', d:'Stays steady with graphic or adult material and uses rotation and breaks.'}
+  {id:'s7', name:'AI literacy', d:'Reads engine outputs, spots repeat false positives, writes labeled examples that help retraining.'}
 ];
 
 var SAMPLES = [
@@ -22,10 +21,10 @@ var SAMPLES = [
     policy:'Alcohol policy can also cover non-alcoholic drinks that resemble alcohol in branding, packaging or serving cues — and scenes that imply social or sexual success.',
     question:'This creative makes no on-screen claim about alcohol. What is the strongest reason it still triggers an alcohol-policy review?',
     options:[
-      {t:'The tagline "Taste the forbidden" is misleading because the drink is alcohol-free.',c:false},
-      {t:'It mirrors a spirits brand and pairs the drink with a party scene, so it may resemble alcohol and imply social success even though each element alone passes.',c:true},
-      {t:'Non-alcoholic drinks are always restricted under alcohol policy in every market.',c:false},
-      {t:'The bottle violates the ad format size requirements.',c:false}
+      {t:'The tagline is misleading because the drink is alcohol-free, even though "forbidden" suggests something restricted.',c:false},
+      {t:'Each element alone passes, but the branding and party scene together resemble a spirits ad and imply social success.',c:true},
+      {t:'Any drink that resembles alcohol packaging must be blocked everywhere, regardless of context, local rules, or the product classification.',c:false},
+      {t:'The bottle violates creative-format rules because the label text is too small to read at typical mobile display sizes.',c:false}
     ],
     rationale:'Alcohol policy also covers drinks that resemble alcohol and scenes implying social/sexual success. Each layer passes alone — a legal non-alcoholic drink, a brand, a party scene — and the edge case lives in the combination. That is multimodal reading plus policy reasoning: the call comes from the whole, not any single signal.',
     pins:[{x:37,y:51,t:'Brand cue — bottle + mark'},{x:50,y:83,t:'"Taste the forbidden" claim'}],
@@ -54,10 +53,10 @@ var SAMPLES = [
     policy:'Misrepresentation covers impersonation and lookalike brands; text hidden inside an image is a manipulated-media / misrepresentation cue.',
     question:'Which evasion tactic is most clearly present in this creative?',
     options:[
-      {t:'A hidden redirect to a different domain.',c:false},
+      {t:'A hidden redirect that sends users to a completely different domain after they click the main call-to-action button.',c:false},
       {t:'A lookalike brand mark, plus text hidden in the image and a fake system alert.',c:true},
-      {t:'A prescription drug claim in the fine print.',c:false},
-      {t:'Missing responsible-gambling information.',c:false}
+      {t:'A prescription-drug claim buried in the fine print, which would fall under healthcare and medicines policy instead.',c:false},
+      {t:'Missing responsible-gambling information and certification numbers, which only applies to licensed betting and casino advertisers.',c:false}
     ],
     rationale:'Adversarial thinking means spotting lookalike brands, text hidden in images, and fake system alerts. All three are evasion cues the engine may miss and a reviewer must flag.',
     pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Hidden text in image'}],
@@ -76,10 +75,10 @@ var SAMPLES = [
     policy:'Healthcare & medicines: prescription drug terms and unapproved substances are restricted; certification and country rules sit outside the creative. A violation can live in the audio even when the on-screen text is clean.',
     question:'Where does the primary violation live?',
     options:[
-      {t:'In the on-screen caption.',c:false},
-      {t:'In the audio only — a prescription drug is named in the voiceover, not on screen.',c:true},
-      {t:'On the landing page.',c:false},
-      {t:'There is no violation.',c:false}
+      {t:'In the on-screen caption, where the insurance claim is the single strongest restricted-healthcare signal the creative contains.',c:false},
+      {t:'In the audio only — a prescription drug is named in the voiceover, not shown on screen.',c:true},
+      {t:'On the landing page, which always overrides whatever the creative itself shows or says to the reviewer.',c:false},
+      {t:'There is no violation, because telehealth advertising is fully exempt from prescription drug restrictions in every market worldwide.',c:false}
     ],
     rationale:'The key claim is spoken, not shown — the canonical multimodal-reading test. Because it runs in three countries, regional/regulatory fluency decides each verdict separately.',
     secondary:{label:'Self-check — verdict per country', model:'United States — Disapproved (semaglutide is a prescription drug, no certification shown). Brazil — Disapproved (regulatory rules differ; no local certification shown). India — Disapproved (Rx-only drug; no license shown). In each case a reviewer would request the certificate before finalizing. (Countries are illustrative.)'},
@@ -98,10 +97,10 @@ var SAMPLES = [
     policy:'Gambling: the advertiser must be certified for the country AND the exact URL. A certificate that covers only one URL is a gap; each page may look compliant alone while the click path is the risk.',
     question:'What is the core problem?',
     options:[
-      {t:'The game uses slot reels, which are always prohibited.',c:false},
+      {t:'The game uses animated slot reels with flashing lights, which are prohibited creative formats in every single market worldwide.',c:false},
       {t:'The certificate covers only the free-play URL, while the click path leads to a real-money domain that is not covered.',c:true},
-      {t:'The audio says "win real cash", which alone makes it prohibited.',c:false},
-      {t:'Nothing — a free-to-play game is never a gambling-policy issue.',c:false}
+      {t:'The audio says "win real cash", which by itself automatically makes the entire advertisement prohibited under gambling policy.',c:false},
+      {t:'Nothing at all — a free-to-play casino game with no deposit required can never raise a gambling-policy issue in any region.',c:false}
     ],
     rationale:'Adversarial thinking (spotting the redirect), regulatory fluency (certificate/URL match), and calibrated escalation — this is not a simple fixable gap; it exposes circumvention, so it escalates.',
     secondary:{label:'Self-check — what next?', model:'Uphold/disapprove the real-money path AND escalate to account-level review (repeated or circumventing behavior). A missing certificate alone would be "uphold with guidance"; a redirect to an uncertified real-money domain is a deliberate evasion pattern, so escalate.'},
@@ -120,10 +119,10 @@ var SAMPLES = [
     policy:'Misrepresentation: impersonation, manipulated media (including AI-generated presenters), and unapproved-substance claims ("works like" a prescription drug).',
     question:'Which policy issues are present?',
     options:[
-      {t:'Only a trademark issue with the brand name.',c:false},
-      {t:'An unapproved-substance claim ("works like" a prescription drug) combined with an AI-generated "doctor" — impersonation and manipulated media.',c:true},
-      {t:'Only an editorial/grammar issue.',c:false},
-      {t:'Nothing — a disclaimer makes the AI presenter acceptable.',c:false}
+      {t:'Only a trademark problem with the brand name, because Rejuvacell too closely resembles an existing pharmaceutical company\'s registered product name.',c:false},
+      {t:'An unapproved-substance claim working like a prescription drug, combined with an AI-generated doctor — impersonation and manipulated media.',c:true},
+      {t:'Only an editorial or grammar issue in the fine print, which is a quality problem rather than a policy violation.',c:false},
+      {t:'Nothing at all — the visible AI disclaimer at the bottom of the ad makes the generated presenter fully acceptable.',c:false}
     ],
     rationale:'AI literacy (recognizing an AI-generated presenter as manipulated media), adversarial thinking (impersonation plus the drug-equivalence claim), and evidence-based writing (the reply separates what is wrong from what is fine).',
     secondary:{label:'Self-check — draft the advertiser reply', model:'"Your ad was disapproved because it (1) claims Rejuvacell works like a prescription medication without authorization, and (2) presents an AI-generated \'doctor\' as a real endorser, which is impersonation. To run, remove the drug-equivalence claim and the fake-doctor endorsement." — name what is missing, cite the policy, give the fix.'},
@@ -144,10 +143,10 @@ var SAMPLES = [
     policy:'Misrepresentation: hidden costs and dishonest pricing. Cases: separate "fixable gap" from "true violation" and "policy ambiguity".',
     question:'What is the primary violation?',
     options:[
-      {t:'The price is too high.',c:false},
-      {t:'The recurring ₹2,999/month charge is disclosed only in tiny print — a hidden cost / dishonest pricing issue.',c:true},
-      {t:'The 30-day trial itself is prohibited.',c:false},
-      {t:'No violation — "cancel anytime" is sufficient.',c:false}
+      {t:'The price itself is simply too high for this product category, which is a fairness judgment rather than a violation.',c:false},
+      {t:'The recurring ₹2,999/month charge appears only in tiny print — a hidden cost and dishonest pricing issue.',c:true},
+      {t:'The 30-day free trial itself is prohibited outright, because every trial that auto-renews violates advertising rules.',c:false},
+      {t:'No violation at all, because the cancel anytime reassurance in the headline fully discloses every future recurring charge.',c:false}
     ],
     rationale:'Evidence-based writing (name what is missing), calibrated escalation (ask for missing facts rather than guess), and policy reasoning (the hidden-cost rule applied to a borderline disclosure).',
     secondary:{label:'Self-check — what do you do next?', model:'The case file is missing the landing-page screenshot. Do NOT decide yet — request the missing evidence (the four repeat tests require the destination layer). If the landing page confirms the hidden charge, uphold with guidance; if the page makes the price clear, this may be an engine false positive → overturn and log.'},
@@ -166,7 +165,6 @@ var SAMPLES = [
 var idx = 0;
 var answers = {};   // sample id -> selected option index
 var revealed = {};  // sample id -> bool
-var resilience = null;
 window.particleNet = {ready:false};   // test hook: set true when the bg particle network inits
 var countUpRaf = null;                // in-flight score count-up animation handle
 var caseTicks = {};                   // case-file drawer checkbox state per sample id
@@ -433,14 +431,7 @@ function buildDrawer(s){
 function nav(d){
   idx = Math.max(0, Math.min(SAMPLES.length-1, idx+d));
   renderSample();
-}
-
-/* ================= RESILIENCE ================= */
-function pickRes(el){
-  document.querySelectorAll('.resilience .opt').forEach(function(o){ o.classList.remove('sel'); });
-  el.classList.add('sel');
-  resilience = parseInt(el.dataset.r, 10);
-  renderResults();
+  window.scrollTo({top:0, behavior:'smooth'});   // auto-return to top for the next sample
 }
 
 /* ================= SCORING ================= */
@@ -452,14 +443,13 @@ function compute(){
     s.skills.forEach(function(sk){ pts[sk].avail++; if(ok) pts[sk].earned++; });
     if(revealed[s.id]){ total++; if(ok) earned++; }
   });
-  if(resilience !== null){ pts['s8'].avail=1; pts['s8'].earned=resilience; }
-  return {pts:pts, total:total, earned:earned, done:Object.keys(revealed).length, resilientSet: resilience!==null};
+  return {pts:pts, total:total, earned:earned, done:Object.keys(revealed).length};
 }
 
 function renderResults(){
   var c = compute();
   window.lastComputed = c;
-  // Let the radar module redraw the 8-axis chart from the same scores (always FINAL values).
+  // Let the radar module redraw the 7-axis chart from the same scores (always FINAL values).
   window.dispatchEvent(new CustomEvent('scores-updated', {detail:c}));
 
   var hero = document.getElementById('score-hero');
@@ -472,8 +462,7 @@ function renderResults(){
     +'<div style="font-size:11.5px;color:var(--text3);margin-top:5px">samples correct</div></div>'
     +'<span class="tier-badge '+tier+'">'+tierText+'</span>'
     +'<div><h2 style="margin:0 0 6px">Assessment summary</h2>'
-    +'<p class="sub" style="margin:0">'+c.done+' of '+SAMPLES.length+' samples answered · '+c.earned+'/'+c.total+' correct'
-    +(c.resilientSet ? ' · resilience recorded' : ' · <b>resilience not yet recorded</b>')+'</p></div>';
+    +'<p class="sub" style="margin:0">'+c.done+' of '+SAMPLES.length+' samples answered · '+c.earned+'/'+c.total+' correct</p></div>';
   animateScore(hero.querySelector('.score-value'), pct);
 
   var ak = document.getElementById('ak');
@@ -514,8 +503,6 @@ function buildSummary(){
   L.push('');
   L.push('Overall: ' + pct + '% (' + c.earned + '/' + c.total + ' samples correct, '
     + c.done + '/' + SAMPLES.length + ' answered) — Tier: ' + tier);
-  L.push('Resilience: ' + (resilience === 1 ? 'Yes — prepared'
-    : (resilience === 0 ? 'No — would prefer rotation off' : 'Not recorded')));
   L.push('');
   L.push('Skill proficiency:');
   SKILLS.forEach(function(sk){
@@ -601,13 +588,6 @@ function printReport(){
   var links = new THREE.LineSegments(linkGeo, linkMat);
   scene.add(links);
 
-  /* soft cursor aura (nebula glow) */
-  var aura = new THREE.Mesh(
-    new THREE.SphereGeometry(3.4, 24, 24),
-    new THREE.MeshBasicMaterial({color:0x4285f4, transparent:true, opacity:0.10, blending:THREE.AdditiveBlending, depthWrite:false})
-  );
-  scene.add(aura);
-
   var mx=0, my=0;
   addEventListener('mousemove', function(e){ mx=(e.clientX/innerWidth-0.5)*2; my=(e.clientY/innerHeight-0.5)*2; });
   function resize(){ renderer.setSize(innerWidth, innerHeight); camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); }
@@ -630,22 +610,12 @@ function printReport(){
     linkGeo.attributes.position.needsUpdate = true;
   }
 
-  var ray = new THREE.Vector3();
   (function tick(){
     points.rotation.y += 0.0006;
     points.rotation.x += 0.00028;
     camera.position.x += (mx*3.2 - camera.position.x)*0.03;
     camera.position.y += (-my*2.2 - camera.position.y)*0.03;
     camera.lookAt(scene.position);
-
-    /* aura: unproject cursor onto the z=0 plane so the glow sits under the pointer */
-    ray.set(mx, -my, 0.5).unproject(camera).sub(camera.position).normalize();
-    if(ray.z < -0.001){
-      var t = -camera.position.z / ray.z;
-      aura.position.copy(camera.position).addScaledVector(ray, t);
-      aura.position.z = 8;
-    }
-    aura.material.opacity = 0.07 + 0.04 * Math.sin(performance.now() * 0.0016);
 
     updateLinks();
     renderer.render(scene, camera);

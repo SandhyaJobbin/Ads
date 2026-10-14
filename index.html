@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AdSentinel · Ads Creative Edge-Case Assessment</title>
-  <meta name="description" content="Ads Creative Edge-Case Assessment — practice judging ad creatives against policy.">
+  <meta name="description" content="Ads Creative Edge-Case Assessment — hiring assessment for judging ad creatives against policy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   <style>
 /* PREMIUM DARK THEME — Material 3 inspired */
 :root{
-  /* Google brand colors */
+  /* brand palette */
   --g1:#4285f4; --g2:#ea4335; --g3:#fbbc04; --g4:#34a853;
   /* Accent glows */
   --blue:#5b9cff; --blue-d:#8cb7ff; --blue-c:rgba(66,133,244,.14);
@@ -63,11 +63,6 @@ a{color:var(--blue)}
 }
 .brand{font-weight:700;font-size:16px;line-height:1.15;font-family:"Sora",sans-serif}
 .brand small{display:block;font-weight:400;font-size:12px;color:var(--text3)}
-.demo-ribbon{
-  margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--red-d);
-  border:1px solid rgba(234,67,53,.4);border-radius:999px;padding:5px 13px;text-transform:uppercase;
-  background:rgba(234,67,53,.10);
-}
 
 /* WRAP & TABS */
 .wrap{max-width:1080px;margin:0 auto;padding:0 26px 80px}
@@ -257,8 +252,6 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 .sbar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--g1),#9b6bff,var(--g4));width:0;transition:width .6s cubic-bezier(.16,1,.3,1)}
 .sbar .fill.low{background:linear-gradient(90deg,#f5b93a,#fbbc04)}
 .sbar .fill.mid{background:linear-gradient(90deg,#fbbc04,#3ddc77)}
-.resilience{border:1px solid var(--outline2);border-radius:var(--r-md);padding:18px;background:var(--surface2)}
-.resilience .opt{margin-top:8px}
 .answerkey details{border:1px solid var(--outline2);border-radius:var(--r-md);margin-top:10px;background:var(--surface2)}
 .answerkey summary{cursor:pointer;padding:15px 17px;font-weight:600}
 .answerkey details[open]{background:var(--surface3)}
@@ -295,7 +288,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
   #p-results{display:block!important}
   .card{background:#fff!important;border:1px solid #d4d9e2!important;box-shadow:none!important;backdrop-filter:none!important;page-break-inside:avoid}
   .card h2{color:#111!important}
-  .sub,.resilience p,.cf-drawer{color:#333!important}
+  .sub,.cf-drawer{color:#333!important}
   .answerkey .akbody{color:#333!important}
   details{border-color:#d4d9e2!important}
   .cf-drawer{background:#f7f8fa!important;border-color:#ccd2dc!important}
@@ -327,7 +320,6 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
   <div class="topbar">
     <div class="logo">AS</div>
     <div class="brand">AdSentinel<small>Ads Creative Edge-Case Assessment</small></div>
-    <div class="demo-ribbon">Practice</div>
   </div>
   <div class="wrap">
     <div class="tabs" id="tabs">
@@ -338,7 +330,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
     <!-- OVERVIEW -->
     <section class="panel active" id="p-overview">
       <div class="hero">
-        <div class="eyebrow">Ads Creative Edge Cases · Practice</div>
+        <div class="eyebrow">Ads Creative Edge Cases · Assessment</div>
         <h1>Build the <span class="grad">judgment</span><br>the rules miss.</h1>
         <p>The risk engine labels over 99% of creatives automatically. The rest — the edge cases — are where human judgment matters. This assessment puts you in the reviewer's seat: six sample ads, each hiding something the rules didn't anticipate, scored against the eight skills that settle them.</p>
         <div class="metrics">
@@ -348,14 +340,14 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
         </div>
       </div>
       <div class="card" style="margin-top:16px">
-        <h2>The eight skills you'll practice</h2>
+        <h2>The seven skills being assessed</h2>
         <p class="sub">Each skill shows up in at least one sample — watch for them as you go.</p>
         <div class="sgrid" id="skill-grid"></div>
       </div>
       <div class="card">
         <h2>How scoring works</h2>
         <p class="sub">Every sample maps to one to three skills. A correct call earns the sample's skill points; the final report shows proficiency per skill.</p>
-        <div class="illustrative"><b class="tag">Illustrative</b>Policy rules shown here are condensed and illustrative — <b>not Google's verbatim policy text</b>. Scenarios are practice cases, not live reviews.</div>
+        <div class="illustrative"><b class="tag">Illustrative</b>Policy rules shown here are condensed and illustrative — <b>not verbatim policy text</b>. Scenarios are illustrative cases, not live reviews.</div>
         <div class="row" style="margin-top:14px">
           <button class="btn primary" onclick="window.go && window.go('assessment')" title="Begin assessment">Begin the assessment →</button>
         </div>
@@ -383,15 +375,6 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
         <h2>Skill proficiency</h2>
         <svg id="skill-radar" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="180" cy="180" r="110" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".6"/><circle cx="180" cy="180" r="82" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".4"/><circle cx="180" cy="180" r="55" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".3"/><path id="radar-poly" class="radar-path" d="M180,180"/></svg>
       </div>
-      <div class="card">
-        <h2>Resilience — the reality of the job</h2>
-        <div class="resilience">
-          <p style="margin-top:0">The job includes reviewing graphic or adult material. Exposure is capped and reviewers rotate off such queues. Are you prepared to handle that responsibly, using rotation and breaks?</p>
-          <div class="opt" data-r="1" onclick="pickRes(this)"><span class="k">A</span>Yes — I understand and am prepared.</div>
-          <div class="opt" data-r="0" onclick="pickRes(this)"><span class="k">B</span>No — I would prefer a role without graphic/adult material.</div>
-          <p class="sub" style="margin:10px 0 0">This is a realistic preview of the job, not a scored question. Acknowledging it counts toward the Resilience skill.</p>
-        </div>
-      </div>
       <div class="card answerkey">
         <h2>Answer key</h2>
         <div id="ak"></div>
@@ -400,8 +383,8 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
   </div>
   <div class="footer">
     <b>AdSentinel · Ads Creative Edge-Case Assessment.</b><br>
-    All policy rules are <b>illustrative and condensed</b>; they are not Google's verbatim policy text.<br>
-    Scenarios are practice cases, not live reviews.
+    All policy rules are <b>illustrative and condensed</b>; they are not verbatim policy text.<br>
+    Scenarios are illustrative cases, not live reviews.
   </div>
 </div>
 <div id="loupe-overlay" class="loupe-overlay">

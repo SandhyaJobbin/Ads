@@ -1,12 +1,12 @@
-# Ads Creative Edge-Case Assessment — Interactive Practice
+# Ads Creative Edge-Case Assessment — Interactive Hiring Assessment
 
-An interactive practice assessment for reviewing **Google Ads Creative Edge Cases** — put yourself in the reviewer's seat and get scored on eight skills.
+An interactive assessment for reviewing **ads creative edge cases** — put yourself in the reviewer's seat and get scored on seven skills.
 
-> **Illustrative only.** The 6 sample ads, policy rules, and scoring shown here are illustrative examples used to demonstrate the assessment experience — not production Google Ads policy.
+> **Illustrative only.** The 6 sample ads, policy rules, and scoring shown here are illustrative examples used to demonstrate the assessment experience — not production advertising policy.
 
 ## What's inside
 - **6 sample cases** — 2 image, 2 video, 2 text ads
-- **8-skill competency scoring** — policy reasoning, multimodal reading, adversarial thinking, regional/language/regulatory fluency, evidence-based writing, calibrated escalation, AI literacy, resilience
+- **7-skill competency scoring** — policy reasoning, multimodal reading, adversarial thinking, regional/language/regulatory fluency, evidence-based writing, calibrated escalation, AI literacy
 - **Interactive results** — radar-style skill profile, per-skill bars, verdict chip, and answer key
 
 ## Run locally
