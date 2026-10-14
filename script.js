@@ -18,15 +18,15 @@ var SAMPLES = [
   {
     id:'q1', type:'image', tlabel:'Image sample', title:'NOIR & CO. — spirit-free elixir',
     skills:['s1','s2'],
-    policy:'Alcohol policy can also cover non-alcoholic drinks that resemble alcohol in branding, packaging or serving cues — and scenes that imply social or sexual success.',
-    question:'The drink itself is legal and alcohol-free. What is the strongest reason this creative still triggers an alcohol-policy review?',
+    policy:'Alcohol: ads for alcoholic drinks are restricted. The policy looks at how an ad presents a product, not only at what the product is, and it does not allow ads that link drinking to social or sexual success.',
+    question:'The drink is legal and contains no alcohol. What is the strongest reason this ad still needs an alcohol-policy review?',
     options:[
-      {t:'The tagline is misleading because the drink is alcohol-free, even though "forbidden" suggests something restricted.',c:false},
-      {t:'Each element alone passes, but the branding and party scene together resemble a spirits ad and imply social success.',c:true},
-      {t:'Any drink that resembles alcohol packaging must be blocked everywhere, regardless of context, local rules, or the product classification.',c:false},
-      {t:'The bottle violates creative-format rules because the label text is too small to read at typical mobile display sizes.',c:false}
+      {t:'The word "forbidden" is a false claim, because nothing about a legal, alcohol-free drink is forbidden.',c:false},
+      {t:'Together, the spirits-style bottle, the whisky glass, the toasting party and the "forbidden" tagline make it look like an alcohol ad that links the drink to social success.',c:true},
+      {t:'The flavour notes "oak, smoke & midnight" describe whisky, so the ad is making a false claim about what is in the bottle.',c:false},
+      {t:'It does not need an alcohol review: "0% alcohol" is stated clearly in the headline, so viewers know it is not alcohol.',c:false}
     ],
-    rationale:'Alcohol policy also covers drinks that resemble alcohol and scenes implying social/sexual success. Each layer passes alone — a legal non-alcoholic drink, a brand, a party scene — and the edge case lives in the combination. That is multimodal reading plus policy reasoning: the call comes from the whole, not any single signal.',
+    rationale:'Alcohol policy looks at how a product is presented, not just what is in the bottle. No single element settles this case: the drink is legal and the headline says 0%. But the bottle styling, whisky glass, toasting crowd and "forbidden" tagline together read as a spirits ad that ties the drink to social success. The flavour notes on their own are just description, and a clear "0% alcohol" label does not cancel how the whole ad looks.',
     pins:[{x:37,y:51,t:'Brand cue — bottle + mark'},{x:50,y:83,t:'"Taste the forbidden" claim'}],
     render:'<div class="mock-img"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<defs><radialGradient id="bg1" cx="50%" cy="40%" r="80%"><stop offset="0%" stop-color="#2a1f2e"/><stop offset="100%" stop-color="#0d0d13"/></radialGradient>'
@@ -48,18 +48,18 @@ var SAMPLES = [
       +'</svg></div>'
   },
   {
-    id:'q2', type:'image', tlabel:'Image sample', title:'NIKKE — sneakers, lookalike mark',
+    id:'q2', type:'image', tlabel:'Image sample', title:'NIKKE — running shoes',
     skills:['s3'],
-    policy:'Misrepresentation covers impersonation and lookalike brands; text hidden inside an image is a manipulated-media / misrepresentation cue.',
-    question:'Which evasion tactic is most clearly present in this creative?',
+    policy:'Misrepresentation: ads must not mislead users about who the advertiser is or what they are clicking on, and must not use design tricks to get past automated review.',
+    question:'Which option lists everything in this ad that should be flagged?',
     options:[
-      {t:'The sneaker design copies a famous brand\'s look, so the only concern is product counterfeiting — the ad copy itself raises no impersonation issue.',c:false},
-      {t:'A lookalike brand mark, plus text hidden inside the image and a fake system alert — three distinct evasion cues in one creative.',c:true},
-      {t:'The alert box is just stylized urgency designed to grab attention — users can easily tell it is advertising, not an evasion tactic worth flagging.',c:false},
-      {t:'The faint SALE ENDS text is a legibility and contrast problem in the design, not a deception tactic, so it does not need to be flagged.',c:false}
+      {t:'Only the brand: the NIKKE name, the borrowed logo and the reworded slogan pass the ad off as a famous brand.',c:false},
+      {t:'Three things: the brand is passed off as a famous one, the "Storage almost full" box imitates a phone system alert, and the faint angled sale text sits where text checks may miss it.',c:true},
+      {t:'The brand and the "Storage almost full" alert. The faint sale text in the corner is weak design, not something to flag.',c:false},
+      {t:'The "Storage almost full" alert only. NIKKE is spelled differently, so it is a separate company and not impersonation.',c:false}
     ],
-    rationale:'Adversarial thinking means spotting lookalike brands, text hidden in images, and fake system alerts. Each distractor re-frames one of those cues as benign — product design, ordinary urgency, a legibility nit — but the lookalike mark impersonates a brand in the copy itself, the alert imitates a system notification, and the hidden text is concealed by design. All three are evasion cues the engine may miss and a reviewer must flag.',
-    pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Hidden text in image'}],
+    rationale:'There are three separate problems. The NIKKE name, the famous logo and the reworded "Just do it" slogan pass the ad off as another brand (impersonation). The "Storage almost full — Tap to clean now" box copies a phone system alert to trick people into tapping. The sale text is small, angled and low-contrast at the edge of the image, a common way to slip claims past automated text checks. A different spelling does not stop it being impersonation, and calling the faint text "just design" misses why it was placed there.',
+    pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Faint text at image edge'}],
     render:'<div class="mock-img" style="background:#eef1f5"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<rect width="640" height="360" fill="#eef1f5"/>'
       +'<g transform="translate(300,40) rotate(-18)"><ellipse cx="0" cy="150" rx="120" ry="30" fill="#d7dde5"/><path d="M-90 150 Q-40 40 60 30 L150 70 Q80 100 60 140 L10 150 Q-40 160 -90 150 Z" fill="#1a73e8"/><path d="M-90 150 Q-20 120 60 90 L120 110 Q40 150 -90 150 Z" fill="#f4f7fb"/><path d="M20 60 L110 68" stroke="#fff" stroke-width="8" stroke-linecap="round"/><rect x="60" y="118" width="90" height="16" rx="4" fill="#ea4335" transform="rotate(-4 60 118)"/></g>'
@@ -71,40 +71,39 @@ var SAMPLES = [
   },
   {
     id:'q3', type:'video', tlabel:'Video sample', title:'vidaMed — telehealth visit',
-    skills:['s2','s4','s1'],
-    policy:'Healthcare & medicines: prescription drug terms and unapproved substances are restricted; certification and country rules sit outside the creative. A violation can live in the audio even when the on-screen text is clean.',
-    question:'Where does the primary violation live?',
+    skills:['s2','s1'],
+    policy:'Healthcare & medicines: ads may not promote prescription drugs unless the advertiser is certified to do so in that market. Review everything the ad shows and says.',
+    question:'Which part of this ad breaks the healthcare policy?',
     options:[
-      {t:'In the on-screen caption, where the insurance claim is the single strongest restricted-healthcare signal the creative contains.',c:false},
-      {t:'In the audio only — a prescription drug is named in the voiceover, not shown on screen.',c:true},
-      {t:'On the landing page, which always overrides whatever the creative itself shows or says to the reviewer.',c:false},
-      {t:'There is no violation, because telehealth advertising is fully exempt from prescription drug restrictions in every market worldwide.',c:false}
+      {t:'The on-screen caption: "most insurance accepted" is a healthcare claim that needs proof before it can run.',c:false},
+      {t:'The voiceover: it names a prescription drug, even though nothing on screen mentions it.',c:true},
+      {t:'The doctor on screen: showing a medical professional counts as an unverified medical endorsement.',c:false},
+      {t:'None of it. A telehealth service advertising online doctor visits is allowed, and the ad only offers a consultation.',c:false}
     ],
-    rationale:'The key claim is spoken, not shown — the canonical multimodal-reading test. Because it runs in three countries, regional/regulatory fluency decides each verdict separately.',
-    secondary:{label:'Self-check — verdict per country', model:'United States — Disapproved (semaglutide is a prescription drug, no certification shown). Brazil — Disapproved (regulatory rules differ; no local certification shown). India — Disapproved (Rx-only drug; no license shown). In each case a reviewer would request the certificate before finalizing. (Countries are illustrative.)'},
+    rationale:'The visuals and caption are ordinary for a telehealth ad. The problem is spoken: the voiceover names semaglutide, a prescription drug, and offers to ship it to the viewer. With no certification shown, the ad is promoting a prescription drug. A reviewer who only reads the screen misses it.',
+    secondary:{label:'Self-check — what next?', model:'Disapprove for promoting a prescription drug without certification. In the note to the advertiser, point to exactly where the problem is (the voiceover, around 0:03) so they do not just re-check the on-screen text. If they hold a valid certification for the target country, they can submit it and ask for a re-review.'},
     pins:[{x:50,y:48,t:'Violation lives in audio only'}],
     render:'<div class="player">'
       +'<div class="screen"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="360" fill="#1c2a3a"/><circle cx="320" cy="150" r="78" fill="#2c3e52"/><circle cx="320" cy="150" r="78" fill="none" stroke="#3f5872"/><circle cx="320" cy="135" r="46" fill="#e7c9a9"/><path d="M296 135 q24 -30 48 0 l-48 30 0 -30 z" fill="#5b3a29"/><rect x="280" y="150" width="80" height="58" rx="10" fill="#f6f9fc"/><path d="M320 156 v14 M320 170 v12" stroke="#1a73e8" stroke-width="3"/></svg>'
       +'<div class="caption">Book an online doctor visit — most insurance accepted.</div></div>'
       +'<div class="play-ctrl"><div class="pbtn">▶</div><div class="bar"><i></i></div><span class="mono" style="font-size:11px">0:14</span></div>'
       +'</div>'
-      +'<div class="audio"><div class="ah">🔊 Audio (spoken, not shown)</div>"…and if it\'s right for you, we prescribe <b>semaglutide</b> — shipped to your door, no pharmacy trip needed."</div>'
-      +'<div class="strip"><span class="p">🇺🇸 <b>United States</b></span><span class="p">🇧🇷 <b>Brazil</b></span><span class="p">🇮🇳 <b>India</b></span></div>'
+      +'<div class="audio"><div class="ah">🔊 Audio transcript</div>"…and if it\'s right for you, we prescribe semaglutide — shipped to your door, no pharmacy trip needed."</div>'
   },
   {
     id:'q4', type:'video', tlabel:'Video sample', title:'LuckySpin — free-to-play casino',
     skills:['s3','s6','s4'],
-    policy:'Gambling: the advertiser must be certified for the country AND the exact URL. A certificate that covers only one URL is a gap; each page may look compliant alone while the click path is the risk.',
-    question:'What is the core problem?',
+    policy:'Gambling: real-money gambling ads need a certificate that covers both the country and the website the ad sends people to.',
+    question:'Look at the ad, the landing page and the certificate on file. What is the core problem?',
     options:[
-      {t:'The game uses animated slot reels with flashing lights, which are prohibited creative formats in every single market worldwide.',c:false},
-      {t:'The certificate covers only the free-play URL, while the click path leads to a real-money domain that is not covered.',c:true},
-      {t:'The audio says "win real cash", which by itself automatically makes the entire advertisement prohibited under gambling policy.',c:false},
-      {t:'Nothing at all — a free-to-play casino game with no deposit required can never raise a gambling-policy issue in any region.',c:false}
+      {t:'The slot-machine visuals and "JACKPOT" animation make a free game look like real gambling, and that is the main issue.',c:false},
+      {t:'The certificate covers only luckyspin-play.net, but its "Play for real money" link sends users to luckyspin-casino.com, which is not covered.',c:true},
+      {t:'The "FREE TO PLAY • NO DEPOSIT" caption has no age-restriction notice, and that is the main issue.',c:false},
+      {t:'There is no core problem: the advertiser holds a gambling certificate, so the ad and its links are covered.',c:false}
     ],
-    rationale:'Adversarial thinking (spotting the redirect), regulatory fluency (certificate/URL match), and calibrated escalation — this is not a simple fixable gap; it exposes circumvention, so it escalates.',
-    secondary:{label:'Self-check — what next?', model:'Uphold/disapprove the real-money path AND escalate to account-level review (repeated or circumventing behavior). A missing certificate alone would be "uphold with guidance"; a redirect to an uncertified real-money domain is a deliberate evasion pattern, so escalate.'},
-    pins:[{x:50,y:48,t:'Click path leaves certified URL'}],
+    rationale:'The certified page looks fine on its own, and the ad sends people there. The issue is the next click: "Play for real money" leads to luckyspin-casino.com, which the certificate does not cover. The "win real cash" voiceover is also misleading for a "free" game, and it is the clue that should send you looking for the real-money path. The visuals and a missing age notice are secondary; the uncovered real-money site decides the case, and it suggests the free page is being used to get round certification.',
+    secondary:{label:'Self-check — what next?', model:'Disapprove the ad for sending users to an uncertified real-money site, AND escalate the account for review. A missing certificate on its own would be fixed with guidance to the advertiser; a free page that hands users on to an uncertified real-money site looks deliberate, so it goes up.'},
+    pins:[{x:50,y:48,t:'"Real money" link leaves the certified site'}],
     render:'<div class="player">'
       +'<div class="screen"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="360" fill="#140f2e"/><g font-family="Arial" font-weight="700"><rect x="150" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="200" cy="120" r="18" fill="#ffd23f"/><circle cx="200" cy="160" r="18" fill="#ff6b6b"/><circle cx="200" cy="80" r="18" fill="#4dd0e1"/><rect x="270" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="320" cy="120" r="18" fill="#4dd0e1"/><circle cx="320" cy="160" r="18" fill="#ffd23f"/><circle cx="320" cy="80" r="18" fill="#ff6b6b"/><rect x="390" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="440" cy="120" r="18" fill="#ff6b6b"/><circle cx="440" cy="160" r="18" fill="#ffd23f"/><circle cx="440" cy="80" r="18" fill="#4dd0e1"/></g><text x="320" y="270" fill="#ffd23f" font-size="40" text-anchor="middle" font-weight="800" font-family="Arial">JACKPOT</text>'
       +'</svg><div class="caption">FREE TO PLAY • NO DEPOSIT</div></div>'
@@ -114,22 +113,22 @@ var SAMPLES = [
       +'<div class="strip"><span class="p">Landing page <b>luckyspin-play.net</b> → "Play for real money" links to <b>luckyspin-casino.com</b></span><span class="p cert">Certificate on file: <b>luckyspin-play.net</b> only</span></div>'
   },
   {
-    id:'q5', type:'text', tlabel:'Text sample', title:'Rejuvacell — supplement endorsement',
+    id:'q5', type:'text', tlabel:'Text sample', title:'Rejuvacell — supplement ad',
     skills:['s7','s3','s5'],
-    policy:'Misrepresentation: impersonation, manipulated media (including AI-generated presenters), and unapproved-substance claims ("works like" a prescription drug).',
+    policy:'Misrepresentation & healthcare: ads must not make unapproved medical claims, and must not use fake or misleading endorsements, including AI-generated people.',
     question:'Which policy issues are present?',
     options:[
-      {t:'Only a trademark problem with the brand name, because Rejuvacell too closely resembles an existing pharmaceutical company\'s registered product name.',c:false},
-      {t:'An unapproved-substance claim working like a prescription drug, combined with an AI-generated doctor — impersonation and manipulated media.',c:true},
-      {t:'Only an editorial or grammar issue in the fine print, which is a quality problem rather than a policy violation.',c:false},
-      {t:'Nothing at all — the visible AI disclaimer at the bottom of the ad makes the generated presenter fully acceptable.',c:false}
+      {t:'Only the price: "Claim 80% off" is an unverified discount claim that needs proof.',c:false},
+      {t:'It claims a supplement works like a prescription drug, and it uses an AI-generated "doctor" as an endorser. A fine-print label does not make a fake endorsement acceptable.',c:true},
+      {t:'Only the drug comparison. The AI presenter is labelled in the fine print, so the endorsement is acceptable.',c:false},
+      {t:'Only the endorsement. Saying it "works like" a prescription drug is a comparison, not a medical claim, so it is allowed.',c:false}
     ],
-    rationale:'AI literacy (recognizing an AI-generated presenter as manipulated media), adversarial thinking (impersonation plus the drug-equivalence claim), and evidence-based writing (the reply separates what is wrong from what is fine).',
+    rationale:'There are two issues. Saying a supplement "works like Rx weight-loss medication" is an unapproved medical claim: a comparison to a drug is still a drug claim. And "Dr. Marcus Reed" is an AI-generated person presented as a real doctor recommending the product. The fine-print label does not fix that, because the headline still has him talking about "my patients". Catching only one of the two leaves a violating ad live.',
     secondary:{label:'Self-check — draft the advertiser reply', model:'"Your ad was disapproved because it (1) claims Rejuvacell works like a prescription medication without authorization, and (2) presents an AI-generated \'doctor\' as a real endorser, which is impersonation. To run, remove the drug-equivalence claim and the fake-doctor endorsement." — name what is missing, cite the policy, give the fix.'},
     pins:[{x:50,y:40,t:'Drug-equivalence claim'},{x:50,y:84,t:'AI presenter as endorser'}],
-    evidence:['Ad copy + screenshot archived','Endorser marked as AI-generated in file','No certification attached for the Rx-equivalence claim','Account history / prior violations checked'],
+    evidence:['Ad copy + screenshot archived','Endorser marked as AI-generated in file','No certification attached for the prescription-drug claim','Account history / prior violations checked'],
     render:'<div class="adcard">'
-      +'<img src="assets/q5-doctor.png" alt="AI-generated doctor endorser" style="width:64px;height:64px;border-radius:14px;object-fit:cover;display:block;margin-bottom:12px;border:1px solid #e8eaed">'
+      +'<img src="assets/q5-doctor.png" alt="AI-generated doctor endorser" style="width:100%;max-width:280px;aspect-ratio:16/9;border-radius:14px;object-fit:cover;display:block;margin-bottom:12px;border:1px solid #e8eaed">'
       +'<div style="font-size:18px;font-weight:700">My patients are shocked — it works like a prescription drug.</div>'
       +'<div style="color:#444746;margin-top:6px">Dr. Marcus Reed recommends <b>Rejuvacell</b>. Clinically shown to work like Rx weight-loss medication — no prescription needed.</div>'
       +'<div class="cta">Claim 80% off</div>'
@@ -138,20 +137,20 @@ var SAMPLES = [
       +'</div>'
   },
   {
-    id:'q6', type:'text', tlabel:'Text sample', title:'ProFree — hidden recurring charge',
+    id:'q6', type:'text', tlabel:'Text sample', title:'ProFree — subscription trial',
     skills:['s5','s6','s1'],
-    policy:'Misrepresentation: hidden costs and dishonest pricing. A "free" offer must disclose material terms clearly — a recurring price that never appears in the ad is an omission, not fine print.',
-    question:'The headline promises 30 days free. Based on the creative alone, what is the primary violation?',
+    policy:'Misrepresentation: ads must be honest about pricing and must clearly show the key terms of any "free" offer.',
+    question:'The headline promises 30 days free. Based on the ad alone, what is the main violation?',
     options:[
-      {t:'The price itself is simply too high for this product category, which is a fairness judgment rather than a violation.',c:false},
-      {t:'A material cost is missing — the fine print admits the subscription renews at a monthly rate, but the ad never states what that rate is.',c:true},
-      {t:'The 30-day free trial itself is prohibited outright, because every trial that auto-renews into a paid subscription violates advertising rules in all markets.',c:false},
-      {t:'The cancel-anytime reassurance is missing a step-by-step cancellation tutorial, which subscription advertisements are required to include in the creative itself.',c:false}
+      {t:'"No risk" is the main violation: the advertiser cannot promise that a subscription carries zero risk.',c:false},
+      {t:'A key cost is missing: the fine print says the trial turns into a paid monthly plan, but the ad never says how much it costs.',c:true},
+      {t:'"Cancel anytime" is the main violation, because the ad does not show how to cancel.',c:false},
+      {t:'There is no violation: the fine print clearly says the plan renews automatically, which is enough disclosure.',c:false}
     ],
-    rationale:'Evidence-based writing (name what is missing — the recurring price), calibrated escalation (the landing page and billing flow still need checking), and policy reasoning ("free" claims must make material terms clear in the ad itself).',
-    secondary:{label:'Self-check — what do you do next?', model:'The ad-side omission is established — no recurring price appears anywhere in the creative. Uphold with guidance for the missing disclosure, and request the landing-page screenshot still absent from the file: if the page buries the charge too, treat it as a pattern and escalate; if the page prices it clearly, the fix is the ad copy, so name that in the reply.'},
+    rationale:'The fine print says the plan renews, but not what it costs, and the price is the term users most need to know. "No risk" and "cancel anytime" are soft claims worth noting, but the missing monthly price is what makes the "free" offer misleading. Saying a plan renews is not the same as saying what it costs.',
+    secondary:{label:'Self-check — what do you do next?', model:'The problem in the ad is clear: no monthly price appears anywhere. Disapprove with guidance to add the price, and request the landing-page screenshot that is missing from the file. If the landing page also hides the charge, treat it as a pattern and escalate. If the page shows the price clearly, the fix is only the ad copy, so say that in your reply.'},
     pins:[{x:50,y:76,t:'Recurring price never disclosed'}],
-    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Landing page shows the recurring price clearly?','Advertiser response logged'],
+    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Check whether the landing page shows the monthly price','Advertiser response logged'],
     render:'<div class="adcard">'
       +'<div style="font-size:18px;font-weight:700">Try ProFree — 30 days FREE. No risk, cancel anytime.</div>'
       +'<div class="cta">Start free trial</div>'
@@ -160,6 +159,17 @@ var SAMPLES = [
       +'</div>'
   }
 ];
+
+/* Shuffle answer options once per page load, so the correct answer
+ * is not always in the same position. Scoring reads the c flag, not
+ * the position, so nothing else needs to change. */
+SAMPLES.forEach(function(s){
+  var o = s.options;
+  for(var i = o.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = o[i]; o[i] = o[j]; o[j] = t;
+  }
+});
 
 /* ================= STATE ================= */
 var idx = 0;
@@ -181,7 +191,33 @@ var caseTicks = {};                   // case-file drawer checkbox state per sam
 })();
 
 /* ================= NAVIGATION ================= */
+/* Results (and the answer key) stay locked until every sample is submitted. */
+function allSubmitted(){ return Object.keys(revealed).length >= SAMPLES.length; }
+function updateResultsLock(){
+  var tab = document.querySelector('.tab[data-t="results"]');
+  if(!tab) return;
+  var locked = !allSubmitted();
+  tab.classList.toggle('locked', locked);
+  tab.setAttribute('aria-disabled', locked ? 'true' : 'false');
+  tab.title = locked ? 'Results unlock after you submit all ' + SAMPLES.length + ' samples' : '';
+  tab.textContent = locked ? '🔒 Results' : 'Results';
+}
+function showLockNotice(){
+  var n = document.getElementById('lock-notice');
+  if(!n) return;
+  var done = Object.keys(revealed).length;
+  n.textContent = 'Results unlock after you submit all ' + SAMPLES.length + ' samples. You have submitted ' + done + ' of ' + SAMPLES.length + '.';
+  n.classList.add('show');
+  clearTimeout(showLockNotice.t);
+  showLockNotice.t = setTimeout(function(){ n.classList.remove('show'); }, 4000);
+}
+
 function go(t){
+  if(t === 'results' && !allSubmitted()){
+    if(!document.getElementById('p-assessment').classList.contains('active')) go('assessment');
+    showLockNotice();
+    return;
+  }
   if(window.loupeInstance && window.loupeInstance.isActive) window.loupeInstance.close();
   document.querySelectorAll('.tab').forEach(function(b){ b.classList.toggle('active', b.dataset.t===t); });
   document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
@@ -217,7 +253,6 @@ function injectAssets(s, root){
   var scr = root.querySelector('.player .screen');
   if(!player || !scr) return;
   scr.innerHTML = '<video src="'+a.src+'" poster="'+(a.poster||'')+'" playsinline preload="auto"'
-    + (s.id === 'q3' ? ' data-semaglutide-timestamp="3.5"' : '')
     + ' style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>';
 
   var v = scr.querySelector('video');
@@ -240,24 +275,12 @@ function injectAssets(s, root){
     player.insertBefore(waveform, player.querySelector('.play-ctrl'));
   }
 
-  /* trigger chip (q3 only): visible solely inside the semaglutide audio window */
-  var chip = null;
-  if(s.id === 'q3'){
-    chip = document.createElement('div');
-    chip.className = 'trigger-chip';
-    chip.textContent = 'SEMAGLUTIDE';
-    scr.appendChild(chip);   // absolute inside .screen (position:relative)
-  }
-  var CHIP_IN = 3.0, CHIP_OUT = 4.0;   // illustrative mention window (see data-semaglutide-timestamp)
-  function updateChip(){
-    if(!chip) return;
-    chip.classList.toggle('show', v.currentTime >= CHIP_IN && v.currentTime <= CHIP_OUT);
-  }
+  /* (No on-screen drug-name chip for q3: the point of that sample is that
+   * the drug is only spoken, so showing it on the video would give it away.) */
   function updateProgress(){
     var d = (isFinite(v.duration) && v.duration) ? v.duration : 0;
     if(thumb) thumb.style.left = (d ? (v.currentTime / d * 100) : 0) + '%';
     if(timeEl) timeEl.textContent = fmtTime(v.currentTime) + ' / ' + fmtTime(d || v.currentTime);
-    updateChip();
   }
   function setPlaying(on){
     waveform.classList.toggle('playing', on);
@@ -306,7 +329,7 @@ function renderSample(){
     +'<div id="drawer-slot"></div>'
     +'<div class="reveal" id="reveal"><div id="rationale"></div>'
     +'<div class="row" style="margin-top:10px">'+skillChips+'</div>'
-    + (s.secondary ? '<div class="model"><div class="mh">'+s.secondary.label+'</div>'+s.secondary.model+'</div>' : '')
+    + (s.secondary ? '<div class="model"><div class="mh">'+s.secondary.label+' <span class="ns">Model answer · not scored</span></div>'+s.secondary.model+'</div>' : '')
     +'</div>'
     +'</div>';
 
@@ -335,9 +358,20 @@ function renderSample(){
   document.getElementById('btn-next').disabled = idx===SAMPLES.length-1;
   document.getElementById('btn-submit').disabled = answers[s.id]===undefined;
   document.getElementById('btn-submit').textContent = revealed[s.id] ? 'Revealed' : 'Submit & reveal';
-  document.getElementById('wiz-footer').innerHTML = idx===SAMPLES.length-1
-    ? '<div class="row"><button class="btn primary" onclick="go(\'results\')">See results →</button></div>'
-    : '';
+  renderFooter();
+}
+
+function renderFooter(){
+  var f = document.getElementById('wiz-footer');
+  if(idx !== SAMPLES.length-1){ f.innerHTML = ''; return; }
+  if(allSubmitted()){
+    f.innerHTML = '<div class="row"><button class="btn primary" onclick="go(\'results\')">See results →</button></div>';
+  } else {
+    var left = SAMPLES.filter(function(x){ return !revealed[x.id]; })
+      .map(function(x){ return SAMPLES.indexOf(x) + 1; });
+    f.innerHTML = '<p class="sub" style="margin:0">Submit every sample to see your results. Still to submit: sample '
+      + left.join(', ') + '.</p>';
+  }
 }
 
 function select(i){
@@ -355,6 +389,8 @@ function submit(){
   applyReveal();
   document.getElementById('btn-submit').textContent = 'Revealed';
   document.getElementById('btn-submit').disabled = true;
+  updateResultsLock();
+  renderFooter();
 }
 
 function applyReveal(){
@@ -410,8 +446,10 @@ function buildDrawer(s){
   var ticks = caseTicks[s.id] || (caseTicks[s.id] = s.evidence.map(function(){ return false; }));
   var d = document.createElement('details');
   d.className = 'cf-drawer';
-  d.innerHTML = '<summary>🗂 Case file — Tier 2 evidence <span class="cf-count">'
-    + ticks.filter(Boolean).length + '/' + s.evidence.length + '</span></summary><div class="cf-items"></div>';
+  d.innerHTML = '<summary>🗂 Case file — evidence checklist (not scored) <span class="cf-count">'
+    + ticks.filter(Boolean).length + '/' + s.evidence.length + '</span></summary>'
+    + '<p class="cf-note">What a reviewer would gather before closing this case. Tick items as you think them through; this does not affect your score.</p>'
+    + '<div class="cf-items"></div>';
   var box = d.querySelector('.cf-items');
   s.evidence.forEach(function(ev, i){
     var isMiss = /MISSING/i.test(ev);
@@ -627,6 +665,7 @@ function printReport(){
 
 /* ================= INIT ================= */
 renderSample();
+updateResultsLock();
 window.addEventListener('beforeprint', function(){
   document.querySelectorAll('#p-results details').forEach(function(d){ d.open = true; });
 });
