@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js" defer></script>
   <style>
 /* PREMIUM DARK THEME — Material 3 inspired */
 :root{
@@ -113,6 +114,35 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 .skill p{margin:0;color:var(--text2);font-size:12.8px;line-height:1.5}
 
 /* CHIPS */
+/* Inspection loupe — lens follows cursor, shows the image at 2.5× */
+.loupe-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,7,13,.32);z-index:1000;opacity:0;pointer-events:none;transition:opacity .2s;cursor:crosshair}
+.loupe-overlay.active{opacity:1;pointer-events:auto}
+.loupe-circle{position:absolute;top:0;left:0;width:190px;height:190px;border:2px solid var(--blue);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 26px rgba(66,133,244,.55), inset 0 0 0 1px rgba(255,255,255,.25);overflow:hidden;pointer-events:none}
+.loupe-circle::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.5);z-index:2}
+.loupe-circle::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.5);z-index:2}
+.loupe-inner{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;background-color:rgba(5,7,13,.6)}
+
+/* Detection overlays — region markers drawn inside .mock-img */
+.inspection-overlay{position:absolute;inset:0;pointer-events:none;z-index:10;opacity:0;transition:opacity .25s;background:linear-gradient(135deg,rgba(255,107,97,.10),transparent 55%)}
+.inspection-overlay.q2-detection{background:linear-gradient(45deg,rgba(66,133,244,.10),transparent 55%)}
+.inspection-overlay.q1-detection,.inspection-overlay.q2-detection{opacity:1}
+.inspection-overlay::before,.inspection-overlay::after{content:"";position:absolute;display:flex;align-items:flex-start;box-sizing:border-box;font:700 8px/1.4 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;border:2px solid;white-space:nowrap;text-shadow:0 0 2px rgba(5,7,13,.95),0 0 3px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.9)}
+/* Q1 — spirits-brand bottle cues + implied-claim tagline */
+.inspection-overlay.q1-detection::before{content:"Brand cues";left:30%;top:23%;width:14%;height:61%;border-color:#ff6b61;color:#ff938c;background:rgba(255,107,97,.07)}
+.inspection-overlay.q1-detection::after{content:"Implied claim";left:22%;top:77%;width:56%;height:11%;border-color:#ffd069;color:#ffd069;background:rgba(251,188,4,.07)}
+/* Q2 — fake system alert + text hidden inside the image */
+.inspection-overlay.q2-detection::before{content:"Fake alert";left:5.5%;top:11%;width:29%;height:25%;border-color:#4285f4;color:#8cb7ff;background:rgba(66,133,244,.08)}
+.inspection-overlay.q2-detection::after{content:"Text in image";left:56%;top:77%;width:31%;height:11%;border-color:#3ddc77;color:#6fe69b;background:rgba(52,168,83,.08)}
+
+/* Loupe toggle button (rendered into the creative label for image samples) */
+.btn-loupe{position:relative;z-index:1001;margin-left:8px;font-size:10px;padding:4px 12px;border:1px solid var(--outline2);border-radius:8px;background:var(--surface2);color:var(--text2);cursor:pointer;transition:.2s}
+.btn-loupe:hover{color:var(--blue);border-color:var(--blue)}
+.btn-loupe.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Update creative frame to include loupe trigger */
+.creative .label{justify-content:space-between;align-items:center}
+.creative .label .type{margin-left:auto}
+
 .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-size:12px;font-weight:600}
 .chip.type{background:var(--blue-c);color:var(--blue-d)}
 .chip.skill{background:var(--surface3);color:var(--text2);border:1px solid var(--outline2);padding:2px 9px}
@@ -264,7 +294,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
         <p class="sub">Every sample maps to one to three skills. A correct call earns the sample's skill points; the final report shows proficiency per skill.</p>
         <div class="illustrative"><b class="tag">Illustrative</b>Policy rules shown here are condensed and illustrative — <b>not Google's verbatim policy text</b>. Scenarios are practice cases, not live reviews.</div>
         <div class="row" style="margin-top:14px">
-          <button class="btn primary" onclick="go('assessment')">Begin the assessment →</button>
+          <button class="btn primary" onclick="window.go && window.go('assessment')" title="Begin assessment">Begin the assessment →</button>
         </div>
       </div>
     </section>
@@ -285,9 +315,9 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
     <!-- RESULTS -->
     <section class="panel" id="p-results">
       <div class="card score-hero" id="score-hero"></div>
-      <div class="card">
+      <div class="card radar-container">
         <h2>Skill proficiency</h2>
-        <div id="skill-bars"></div>
+        <svg id="skill-radar" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="180" cy="180" r="110" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".6"/><circle cx="180" cy="180" r="82" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".4"/><circle cx="180" cy="180" r="55" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".3"/><path id="radar-poly" class="radar-path" d="M180,180"/></svg>
       </div>
       <div class="card">
         <h2>Resilience — the reality of the job</h2>
@@ -310,5 +340,10 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
     Scenarios are practice cases, not live reviews.
   </div>
 </div>
+<div id="loupe-overlay" class="loupe-overlay">
+  <div class="loupe-circle"><div class="loupe-inner"></div></div>
+</div>
+<script src="radar.js"></script>
+<script src="loupe.js"></script>
 </body>
 </html>
