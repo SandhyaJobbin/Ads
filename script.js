@@ -53,13 +53,13 @@ var SAMPLES = [
     policy:'Misrepresentation: ads must not mislead users about who the advertiser is or what they are clicking on, and must not use design tricks to get past automated review.',
     question:'Which option lists everything in this ad that should be flagged?',
     options:[
-      {t:'Only the brand: the NIKKE name, the borrowed logo and the reworded slogan pass the ad off as a famous brand.',c:false},
-      {t:'Three things: the brand is passed off as a famous one, the "Storage almost full" box imitates a phone system alert, and the faint angled sale text sits where text checks may miss it.',c:true},
-      {t:'The brand and the "Storage almost full" alert. The faint sale text in the corner is weak design, not something to flag.',c:false},
-      {t:'The "Storage almost full" alert only. NIKKE is spelled differently, so it is a separate company and not impersonation.',c:false}
+      {t:'Only the brand: the NIKKE name and the reworded "Just do it" slogan pass the ad off as a famous brand.',c:false},
+      {t:'Three things: the name and slogan pass the brand off as a famous one, the "Storage almost full" box imitates a phone system alert, and the small angled sale text sits at the edge where text checks may miss it.',c:true},
+      {t:'The brand and the "Storage almost full" alert. The small sale text in the corner is a design choice, not something to flag.',c:false},
+      {t:'The "Storage almost full" alert only. NIKKE is spelled differently and has its own logo, so it is a separate company and not impersonation.',c:false}
     ],
-    rationale:'There are three separate problems. The NIKKE name, the famous logo and the reworded "Just do it" slogan pass the ad off as another brand (impersonation). The "Storage almost full — Tap to clean now" box copies a phone system alert to trick people into tapping. The sale text is small, angled and low-contrast at the edge of the image, a common way to slip claims past automated text checks. A different spelling does not stop it being impersonation, and calling the faint text "just design" misses why it was placed there.',
-    pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Faint text at image edge'}],
+    rationale:'There are three separate problems. The NIKKE name and the reworded "Just do it" slogan pass the ad off as a famous sportswear brand (impersonation), even though the logo is different. The "Storage almost full — Tap to clean now" box copies a phone system alert to trick people into tapping. The sale text is small, angled and pushed to the edge of the image, a common way to slip claims past automated text checks. A different spelling or logo does not stop it being impersonation, and calling the sale text "just design" misses why it was placed there.',
+    pins:[{x:20,y:11,t:'Fake system alert'},{x:86,y:88,t:'Small text at image edge'}],
     render:'<div class="mock-img" style="background:#eef1f5"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<rect width="640" height="360" fill="#eef1f5"/>'
       +'<g transform="translate(300,40) rotate(-18)"><ellipse cx="0" cy="150" rx="120" ry="30" fill="#d7dde5"/><path d="M-90 150 Q-40 40 60 30 L150 70 Q80 100 60 140 L10 150 Q-40 160 -90 150 Z" fill="#1a73e8"/><path d="M-90 150 Q-20 120 60 90 L120 110 Q40 150 -90 150 Z" fill="#f4f7fb"/><path d="M20 60 L110 68" stroke="#fff" stroke-width="8" stroke-linecap="round"/><rect x="60" y="118" width="90" height="16" rx="4" fill="#ea4335" transform="rotate(-4 60 118)"/></g>'

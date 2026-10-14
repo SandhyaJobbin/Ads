@@ -22,9 +22,9 @@ All assets are **fictional demo brands** for practice. Real drug names (`semaglu
 **Tool:** ChatGPT (DALL·E 3) or Canva · **Ratio:** 16:9 landscape
 
 **Prompt:**
-> A clean sneaker advertisement on a light grey studio background, 16:9. One bold athletic running shoe tilted at a dynamic angle, with a curved swoosh-like check logo that mimics a famous sportswear mark but is subtly altered (different curve/proportion). Large bold black text "NIKKE" centered below the shoe, and a smaller tagline "Just do it — our way." Deceptive details to include: faint rotated text near the bottom-right edge reading "SALE ENDS MIDNIGHT — 90% OFF" in light grey (barely noticeable), and in the top-left corner a small fake smartphone system-alert popup box reading "Storage almost full" with a "Tap to clean now →" button. Minimal, flat, product-advertisement style.
+> A clean sneaker advertisement on a light grey studio background, 16:9 landscape. One bold white-and-black athletic running shoe tilted at a dynamic angle. On the side of the shoe and to the left of it: an original logo, a sharp double-chevron shape like two stacked arrowheads pointing right, solid black. No curved checkmarks, no swooshes, no ticks. The shoe tongue has a small rectangular tab with no text. Large bold black italic text "NIKKE" on the left, with a smaller tagline underneath: "Just do it — our way." Top-left corner: a small smartphone-style system alert box with a red warning icon, reading "Storage almost full" and "Tap to clean now →". Bottom-right edge: small, faint, light-grey text rotated slightly upward, reading "SALE ENDS MIDNIGHT — 90% OFF", easy to miss at first glance. Minimal, flat, premium product-advertisement style.
 
-**Must include:** the altered swoosh-like logo, the "NIKKE" brand, the hidden "90% OFF" text, and the fake system-alert popup. **Must avoid:** reproducing the actual Nike swoosh or the word "Nike".
+**Must include:** an original (non-swoosh) logo, the "NIKKE" brand and slogan, the small "90% OFF" edge text, and the fake system-alert popup. **Must avoid:** any curved swoosh or checkmark logo, the word "Nike", any real brand logo. (The first version of this image drifted to the real swoosh because the prompt asked for a mark that "mimics a famous sportswear mark"; the lookalike lesson now rests on the name and slogan.)
 
 ---
 
