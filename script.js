@@ -53,12 +53,12 @@ var SAMPLES = [
     policy:'Misrepresentation covers impersonation and lookalike brands; text hidden inside an image is a manipulated-media / misrepresentation cue.',
     question:'Which evasion tactic is most clearly present in this creative?',
     options:[
-      {t:'A hidden redirect that sends users to a completely different domain after they click the main call-to-action button.',c:false},
-      {t:'A lookalike brand mark, plus text hidden in the image and a fake system alert.',c:true},
-      {t:'A prescription-drug claim buried in the fine print, which would fall under healthcare and medicines policy instead.',c:false},
-      {t:'Missing responsible-gambling information and certification numbers, which only applies to licensed betting and casino advertisers.',c:false}
+      {t:'The sneaker design copies a famous brand\'s look, so the only concern is product counterfeiting — the ad copy itself raises no impersonation issue.',c:false},
+      {t:'A lookalike brand mark, plus text hidden inside the image and a fake system alert — three distinct evasion cues in one creative.',c:true},
+      {t:'The alert box is just stylized urgency designed to grab attention — users can easily tell it is advertising, not an evasion tactic worth flagging.',c:false},
+      {t:'The faint SALE ENDS text is a legibility and contrast problem in the design, not a deception tactic, so it does not need to be flagged.',c:false}
     ],
-    rationale:'Adversarial thinking means spotting lookalike brands, text hidden in images, and fake system alerts. All three are evasion cues the engine may miss and a reviewer must flag.',
+    rationale:'Adversarial thinking means spotting lookalike brands, text hidden in images, and fake system alerts. Each distractor re-frames one of those cues as benign — product design, ordinary urgency, a legibility nit — but the lookalike mark impersonates a brand in the copy itself, the alert imitates a system notification, and the hidden text is concealed by design. All three are evasion cues the engine may miss and a reviewer must flag.',
     pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Hidden text in image'}],
     render:'<div class="mock-img" style="background:#eef1f5"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<rect width="640" height="360" fill="#eef1f5"/>'
