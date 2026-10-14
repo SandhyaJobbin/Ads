@@ -19,7 +19,7 @@ var SAMPLES = [
     id:'q1', type:'image', tlabel:'Image sample', title:'NOIR & CO. — spirit-free elixir',
     skills:['s1','s2'],
     policy:'Alcohol policy can also cover non-alcoholic drinks that resemble alcohol in branding, packaging or serving cues — and scenes that imply social or sexual success.',
-    question:'This creative makes no on-screen claim about alcohol. What is the strongest reason it still triggers an alcohol-policy review?',
+    question:'The drink itself is legal and alcohol-free. What is the strongest reason this creative still triggers an alcohol-policy review?',
     options:[
       {t:'The tagline is misleading because the drink is alcohol-free, even though "forbidden" suggests something restricted.',c:false},
       {t:'Each element alone passes, but the branding and party scene together resemble a spirits ad and imply social success.',c:true},
@@ -140,22 +140,22 @@ var SAMPLES = [
   {
     id:'q6', type:'text', tlabel:'Text sample', title:'ProFree — hidden recurring charge',
     skills:['s5','s6','s1'],
-    policy:'Misrepresentation: hidden costs and dishonest pricing. Cases: separate "fixable gap" from "true violation" and "policy ambiguity".',
-    question:'What is the primary violation?',
+    policy:'Misrepresentation: hidden costs and dishonest pricing. A "free" offer must disclose material terms clearly — a recurring price that never appears in the ad is an omission, not fine print.',
+    question:'The headline promises 30 days free. Based on the creative alone, what is the primary violation?',
     options:[
       {t:'The price itself is simply too high for this product category, which is a fairness judgment rather than a violation.',c:false},
-      {t:'The recurring ₹2,999/month charge appears only in tiny print — a hidden cost and dishonest pricing issue.',c:true},
-      {t:'The 30-day free trial itself is prohibited outright, because every trial that auto-renews violates advertising rules.',c:false},
-      {t:'No violation at all, because the cancel anytime reassurance in the headline fully discloses every future recurring charge.',c:false}
+      {t:'A material cost is missing — the ad never states the recurring price after the free period, and "free" offers must disclose material terms clearly.',c:true},
+      {t:'The 30-day free trial itself is prohibited outright, because every trial that auto-renews into a paid subscription violates advertising rules in all markets.',c:false},
+      {t:'The cancel-anytime reassurance is missing a step-by-step cancellation tutorial, which subscription advertisements are required to include in the creative itself.',c:false}
     ],
-    rationale:'Evidence-based writing (name what is missing), calibrated escalation (ask for missing facts rather than guess), and policy reasoning (the hidden-cost rule applied to a borderline disclosure).',
-    secondary:{label:'Self-check — what do you do next?', model:'The case file is missing the landing-page screenshot. Do NOT decide yet — request the missing evidence (the four repeat tests require the destination layer). If the landing page confirms the hidden charge, uphold with guidance; if the page makes the price clear, this may be an engine false positive → overturn and log.'},
-    pins:[{x:50,y:76,t:'Hidden recurring charge'}],
-    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Billing flow: is the recurring price shown pre-click?','Advertiser response logged'],
+    rationale:'Evidence-based writing (name what is missing — the recurring price), calibrated escalation (the landing page and billing flow still need checking), and policy reasoning ("free" claims must make material terms clear in the ad itself).',
+    secondary:{label:'Self-check — what do you do next?', model:'The ad-side omission is established — no recurring price appears anywhere in the creative. Uphold with guidance for the missing disclosure, and request the landing-page screenshot still absent from the file: if the page buries the charge too, treat it as a pattern and escalate; if the page prices it clearly, the fix is the ad copy, so name that in the reply.'},
+    pins:[{x:50,y:76,t:'Recurring price never disclosed'}],
+    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Landing page shows the recurring price clearly?','Advertiser response logged'],
     render:'<div class="adcard">'
       +'<div style="font-size:18px;font-weight:700">Try ProFree — 30 days FREE. No risk, cancel anytime.</div>'
       +'<div class="cta">Start free trial</div>'
-      +'<div class="fine">After 30 days, auto-renews at ₹2,999/month. Cancel before renewal to avoid charges.</div>'
+      +'<div class="fine">After the trial, subscriptions renew automatically. Billing terms apply. Cancel anytime.</div>'
       +'<div class="url">www.profree.example</div>'
       +'</div>'
   }
