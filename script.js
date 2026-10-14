@@ -28,6 +28,7 @@ var SAMPLES = [
       {t:'The bottle violates the ad format size requirements.',c:false}
     ],
     rationale:'Alcohol policy also covers drinks that resemble alcohol and scenes implying social/sexual success. Each layer passes alone — a legal non-alcoholic drink, a brand, a party scene — and the edge case lives in the combination. That is multimodal reading plus policy reasoning: the call comes from the whole, not any single signal.',
+    pins:[{x:37,y:51,t:'Brand cue — bottle + mark'},{x:50,y:83,t:'"Taste the forbidden" claim'}],
     render:'<div class="mock-img"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<defs><radialGradient id="bg1" cx="50%" cy="40%" r="80%"><stop offset="0%" stop-color="#2a1f2e"/><stop offset="100%" stop-color="#0d0d13"/></radialGradient>'
       +'<linearGradient id="glass1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7c873"/><stop offset="100%" stop-color="#b76e1f"/></linearGradient>'
@@ -59,6 +60,7 @@ var SAMPLES = [
       {t:'Missing responsible-gambling information.',c:false}
     ],
     rationale:'Adversarial thinking means spotting lookalike brands, text hidden in images, and fake system alerts. All three are evasion cues the engine may miss and a reviewer must flag.',
+    pins:[{x:20,y:24,t:'Fake system alert'},{x:78,y:83,t:'Hidden text in image'}],
     render:'<div class="mock-img" style="background:#eef1f5"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">'
       +'<rect width="640" height="360" fill="#eef1f5"/>'
       +'<g transform="translate(300,40) rotate(-18)"><ellipse cx="0" cy="150" rx="120" ry="30" fill="#d7dde5"/><path d="M-90 150 Q-40 40 60 30 L150 70 Q80 100 60 140 L10 150 Q-40 160 -90 150 Z" fill="#1a73e8"/><path d="M-90 150 Q-20 120 60 90 L120 110 Q40 150 -90 150 Z" fill="#f4f7fb"/><path d="M20 60 L110 68" stroke="#fff" stroke-width="8" stroke-linecap="round"/><rect x="60" y="118" width="90" height="16" rx="4" fill="#ea4335" transform="rotate(-4 60 118)"/></g>'
@@ -81,6 +83,7 @@ var SAMPLES = [
     ],
     rationale:'The key claim is spoken, not shown — the canonical multimodal-reading test. Because it runs in three countries, regional/regulatory fluency decides each verdict separately.',
     secondary:{label:'Self-check — verdict per country', model:'United States — Disapproved (semaglutide is a prescription drug, no certification shown). Brazil — Disapproved (regulatory rules differ; no local certification shown). India — Disapproved (Rx-only drug; no license shown). In each case a reviewer would request the certificate before finalizing. (Countries are illustrative.)'},
+    pins:[{x:50,y:48,t:'Violation lives in audio only'}],
     render:'<div class="player">'
       +'<div class="screen"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="360" fill="#1c2a3a"/><circle cx="320" cy="150" r="78" fill="#2c3e52"/><circle cx="320" cy="150" r="78" fill="none" stroke="#3f5872"/><circle cx="320" cy="135" r="46" fill="#e7c9a9"/><path d="M296 135 q24 -30 48 0 l-48 30 0 -30 z" fill="#5b3a29"/><rect x="280" y="150" width="80" height="58" rx="10" fill="#f6f9fc"/><path d="M320 156 v14 M320 170 v12" stroke="#1a73e8" stroke-width="3"/></svg>'
       +'<div class="caption">Book an online doctor visit — most insurance accepted.</div></div>'
@@ -102,6 +105,7 @@ var SAMPLES = [
     ],
     rationale:'Adversarial thinking (spotting the redirect), regulatory fluency (certificate/URL match), and calibrated escalation — this is not a simple fixable gap; it exposes circumvention, so it escalates.',
     secondary:{label:'Self-check — what next?', model:'Uphold/disapprove the real-money path AND escalate to account-level review (repeated or circumventing behavior). A missing certificate alone would be "uphold with guidance"; a redirect to an uncertified real-money domain is a deliberate evasion pattern, so escalate.'},
+    pins:[{x:50,y:48,t:'Click path leaves certified URL'}],
     render:'<div class="player">'
       +'<div class="screen"><svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="360" fill="#140f2e"/><g font-family="Arial" font-weight="700"><rect x="150" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="200" cy="120" r="18" fill="#ffd23f"/><circle cx="200" cy="160" r="18" fill="#ff6b6b"/><circle cx="200" cy="80" r="18" fill="#4dd0e1"/><rect x="270" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="320" cy="120" r="18" fill="#4dd0e1"/><circle cx="320" cy="160" r="18" fill="#ffd23f"/><circle cx="320" cy="80" r="18" fill="#ff6b6b"/><rect x="390" y="60" width="100" height="150" rx="12" fill="#241b52" stroke="#4a3ba0"/><circle cx="440" cy="120" r="18" fill="#ff6b6b"/><circle cx="440" cy="160" r="18" fill="#ffd23f"/><circle cx="440" cy="80" r="18" fill="#4dd0e1"/></g><text x="320" y="270" fill="#ffd23f" font-size="40" text-anchor="middle" font-weight="800" font-family="Arial">JACKPOT</text>'
       +'</svg><div class="caption">FREE TO PLAY • NO DEPOSIT</div></div>'
@@ -123,6 +127,8 @@ var SAMPLES = [
     ],
     rationale:'AI literacy (recognizing an AI-generated presenter as manipulated media), adversarial thinking (impersonation plus the drug-equivalence claim), and evidence-based writing (the reply separates what is wrong from what is fine).',
     secondary:{label:'Self-check — draft the advertiser reply', model:'"Your ad was disapproved because it (1) claims Rejuvacell works like a prescription medication without authorization, and (2) presents an AI-generated \'doctor\' as a real endorser, which is impersonation. To run, remove the drug-equivalence claim and the fake-doctor endorsement." — name what is missing, cite the policy, give the fix.'},
+    pins:[{x:50,y:40,t:'Drug-equivalence claim'},{x:50,y:84,t:'AI presenter as endorser'}],
+    evidence:['Ad copy + screenshot archived','Endorser marked as AI-generated in file','No certification attached for the Rx-equivalence claim','Account history / prior violations checked'],
     render:'<div class="adcard">'
       +'<img src="assets/q5-doctor.png" alt="AI-generated doctor endorser" style="width:64px;height:64px;border-radius:14px;object-fit:cover;display:block;margin-bottom:12px;border:1px solid #e8eaed">'
       +'<div style="font-size:18px;font-weight:700">My patients are shocked — it works like a prescription drug.</div>'
@@ -145,13 +151,14 @@ var SAMPLES = [
     ],
     rationale:'Evidence-based writing (name what is missing), calibrated escalation (ask for missing facts rather than guess), and policy reasoning (the hidden-cost rule applied to a borderline disclosure).',
     secondary:{label:'Self-check — what do you do next?', model:'The case file is missing the landing-page screenshot. Do NOT decide yet — request the missing evidence (the four repeat tests require the destination layer). If the landing page confirms the hidden charge, uphold with guidance; if the page makes the price clear, this may be an engine false positive → overturn and log.'},
+    pins:[{x:50,y:76,t:'Hidden recurring charge'}],
+    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Billing flow: is the recurring price shown pre-click?','Advertiser response logged'],
     render:'<div class="adcard">'
       +'<div style="font-size:18px;font-weight:700">Try ProFree — 30 days FREE. No risk, cancel anytime.</div>'
       +'<div class="cta">Start free trial</div>'
       +'<div class="fine">After 30 days, auto-renews at ₹2,999/month. Cancel before renewal to avoid charges.</div>'
       +'<div class="url">www.profree.example</div>'
       +'</div>'
-      +'<div class="casefile"><b>📋 Case file (Tier 2)</b>Ticket: advertiser disputes disapproval. In file: ad copy + decision. <span style="color:#ff6b61;font-weight:700">MISSING: landing-page screenshot.</span></div>'
   }
 ];
 
@@ -162,6 +169,7 @@ var revealed = {};  // sample id -> bool
 var resilience = null;
 window.particleNet = {ready:false};   // test hook: set true when the bg particle network inits
 var countUpRaf = null;                // in-flight score count-up animation handle
+var caseTicks = {};                   // case-file drawer checkbox state per sample id
 
 /* ================= SKILL GRID ================= */
 (function(){
@@ -297,6 +305,7 @@ function renderSample(){
     +'<div class="label"><span>Creative under review</span>'+loupeBtn+'</div>'
     +'<div class="body">'+s.render+'</div></div>'
     +'<div class="qbox"><h3>'+s.question+'</h3><div id="opts"></div></div>'
+    +'<div id="drawer-slot"></div>'
     +'<div class="reveal" id="reveal"><div id="rationale"></div>'
     +'<div class="row" style="margin-top:10px">'+skillChips+'</div>'
     + (s.secondary ? '<div class="model"><div class="mh">'+s.secondary.label+'</div>'+s.secondary.model+'</div>' : '')
@@ -315,6 +324,7 @@ function renderSample(){
     opts.appendChild(d);
   });
 
+  buildDrawer(s);
   if(revealed[s.id]){
     applyReveal();
   } else if(answers[s.id] !== undefined){
@@ -363,6 +373,61 @@ function applyReveal(){
   document.getElementById('rationale').innerHTML =
     '<div class="verdict '+(correct?'ok':'bad')+'">'+(correct?'✓ Correct call':'✗ Incorrect call')+'</div>'
     +'<div style="color:var(--text2)">'+s.rationale+'</div>';
+  renderPins(s);
+}
+
+/* ================= #5 ANOMALY INSPECTOR PINS ================= */
+function renderPins(s){
+  var body = document.querySelector('#sample-root .creative .body'); if(!body) return;
+  body.querySelectorAll('.pin-layer').forEach(function(el){ el.remove(); });
+  if(!s.pins || !s.pins.length) return;
+  var host = body.querySelector('.mock-img') || body.querySelector('.player .screen') || body.querySelector('.adcard') || body;
+  var layer = document.createElement('div');
+  layer.className = 'pin-layer';
+  s.pins.forEach(function(p){
+    var el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'pin' + (p.x > 55 ? ' side-left' : '');
+    el.style.left = p.x + '%';
+    el.style.top = p.y + '%';
+    el.title = 'Show the linked policy text';
+    el.innerHTML = '<span class="dot"></span><span class="plbl">' + p.t + '</span>';
+    el.onclick = function(){
+      var illu = document.querySelector('#sample-root .illustrative');
+      if(!illu) return;
+      illu.classList.remove('flash'); void illu.offsetWidth;
+      illu.classList.add('flash');
+      setTimeout(function(){ illu.classList.remove('flash'); }, 1600);
+    };
+    layer.appendChild(el);
+  });
+  host.appendChild(layer);
+}
+
+/* ================= #7 CASE FILE DRAWER (Tier 2 evidence) ================= */
+function buildDrawer(s){
+  var slot = document.getElementById('drawer-slot'); if(!slot) return;
+  slot.innerHTML = '';
+  if(!s.evidence || !s.evidence.length) return;
+  var ticks = caseTicks[s.id] || (caseTicks[s.id] = s.evidence.map(function(){ return false; }));
+  var d = document.createElement('details');
+  d.className = 'cf-drawer';
+  d.innerHTML = '<summary>🗂 Case file — Tier 2 evidence <span class="cf-count">'
+    + ticks.filter(Boolean).length + '/' + s.evidence.length + '</span></summary><div class="cf-items"></div>';
+  var box = d.querySelector('.cf-items');
+  s.evidence.forEach(function(ev, i){
+    var isMiss = /MISSING/i.test(ev);
+    var lab = document.createElement('label');
+    lab.innerHTML = '<input type="checkbox"' + (ticks[i] ? ' checked' : '') + '><span'
+      + (isMiss ? ' class="miss"' : '') + '>' + ev + '</span>';
+    lab.querySelector('input').onchange = function(e){
+      caseTicks[s.id][i] = e.target.checked;
+      if(!isMiss) lab.querySelector('span').classList.toggle('done', e.target.checked);
+      d.querySelector('.cf-count').textContent = caseTicks[s.id].filter(Boolean).length + '/' + s.evidence.length;
+    };
+    box.appendChild(lab);
+  });
+  slot.appendChild(d);
 }
 
 function nav(d){
@@ -436,6 +501,68 @@ function animateScore(el, target){
     if(p < 1) countUpRaf = requestAnimationFrame(step);
     else { el.textContent = target + '%'; countUpRaf = null; }
   })(t0);
+}
+
+/* ================= #6 REPORT: COPY SUMMARY + PRINT ================= */
+function buildSummary(){
+  var c = compute();
+  var pct = c.total ? Math.round(c.earned / c.total * 100) : 0;
+  var tier = pct >= 90 ? 'Interview-ready' : (pct >= 70 ? 'Needs review' : 'Not ready');
+  var L = [];
+  L.push('ADSENTINEL — ADS CREATIVE EDGE-CASE ASSESSMENT');
+  L.push('Executive summary — ' + new Date().toISOString().slice(0, 10));
+  L.push('');
+  L.push('Overall: ' + pct + '% (' + c.earned + '/' + c.total + ' samples correct, '
+    + c.done + '/' + SAMPLES.length + ' answered) — Tier: ' + tier);
+  L.push('Resilience: ' + (resilience === 1 ? 'Yes — prepared'
+    : (resilience === 0 ? 'No — would prefer rotation off' : 'Not recorded')));
+  L.push('');
+  L.push('Skill proficiency:');
+  SKILLS.forEach(function(sk){
+    var p = c.pts[sk.id];
+    var v = p.avail ? Math.round(p.earned / p.avail * 100) : 0;
+    L.push('  - ' + sk.name + ': ' + v + '%');
+  });
+  L.push('');
+  L.push('Samples:');
+  SAMPLES.forEach(function(s, i){
+    var st = !revealed[s.id] ? 'Not answered'
+      : (s.options[answers[s.id]].c ? 'Correct' : 'Incorrect');
+    L.push('  ' + (i + 1) + '. ' + s.title + ' — ' + st);
+    if(revealed[s.id]) L.push('     Key: ' + s.options.filter(function(o){ return o.c; })[0].t);
+  });
+  L.push('');
+  L.push('Policy rules are illustrative and condensed, not verbatim policy text.');
+  return L.join('\n');
+}
+function fallbackCopy(txt){
+  var ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  var ok = false;
+  try { ok = document.execCommand('copy'); } catch(e){}
+  ta.remove();
+  return ok;
+}
+function copySummary(){
+  var btn = document.getElementById('btn-copy');
+  var txt = buildSummary();
+  function done(ok){
+    if(!btn) return;
+    var old = 'Copy summary';
+    btn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+    setTimeout(function(){ btn.textContent = old; }, 1600);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(
+      function(){ done(true); },
+      function(){ done(fallbackCopy(txt)); }
+    );
+  } else done(fallbackCopy(txt));
+}
+function printReport(){
+  go('results');
+  setTimeout(function(){ window.print(); }, 150);
 }
 
 /* ================= THREE.JS BACKGROUND + PARTICLE NETWORK ================= */
@@ -530,4 +657,7 @@ function animateScore(el, target){
 
 /* ================= INIT ================= */
 renderSample();
+window.addEventListener('beforeprint', function(){
+  document.querySelectorAll('#p-results details').forEach(function(d){ d.open = true; });
+});
 console.log('AdSentinel demo ready — go:', typeof go);

@@ -156,7 +156,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 /* CREATIVE FRAME */
 .creative{border:1px solid var(--outline2);border-radius:var(--r-lg);overflow:hidden;background:var(--surface2);margin:15px 0;box-shadow:var(--sh1)}
 .creative .label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);padding:9px 15px;background:var(--surface3);border-bottom:1px solid var(--outline2);display:flex;gap:8px;align-items:center}
-.creative .body{padding:16px}
+.creative .body{padding:16px;position:relative}
 .mock-img{background:#0d0d13;border-radius:var(--r-md);overflow:hidden;position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 .mock-img svg{display:block;width:100%;height:100%}
 
@@ -193,7 +193,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 .strip .cert{border-color:rgba(251,188,4,.4);background:var(--yellow-c);color:#ffd98a}
 
 /* TEXT AD */
-.adcard{border:1px solid rgba(0,0,0,.12);border-radius:var(--r-md);background:#fff;padding:18px;max-width:560px;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.adcard{position:relative;border:1px solid rgba(0,0,0,.12);border-radius:var(--r-md);background:#fff;padding:18px;max-width:560px;box-shadow:0 4px 16px rgba(0,0,0,.3)}
 .adcard .cta{display:inline-block;background:#1a73e8;color:#fff;font-weight:700;border-radius:8px;padding:8px 18px;margin-top:10px;font-size:14px}
 .adcard .fine{font-size:10.5px;color:#9aa0a6;margin-top:10px;line-height:1.4}
 .adcard .url{color:#2a7f3f;font-size:12.5px;margin-top:6px}
@@ -263,6 +263,49 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
 .answerkey summary{cursor:pointer;padding:15px 17px;font-weight:600}
 .answerkey details[open]{background:var(--surface3)}
 .answerkey .akbody{padding:0 17px 15px;font-size:13.5px;color:var(--text2)}
+/* ---- #5 anomaly inspector pins ---- */
+.pin-layer{position:absolute;inset:0;pointer-events:none}
+.pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;border:0;background:none;padding:0;line-height:0}
+.pin .dot{display:block;width:13px;height:13px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(91,156,255,.22),0 0 14px rgba(91,156,255,.8);animation:pinPulse 1.5s ease-in-out infinite alternate}
+@keyframes pinPulse{from{transform:scale(1)}to{transform:scale(1.3)}}
+.pin .plbl{position:absolute;left:19px;top:-4px;font:600 9px/1.35 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:#dfe8ff;background:rgba(5,7,13,.88);border:1px solid rgba(91,156,255,.5);padding:3px 7px;border-radius:6px;white-space:nowrap;pointer-events:none}
+.pin.side-left .plbl{left:auto;right:19px}
+.illustrative.flash{animation:illuFlash 1.5s ease}
+@keyframes illuFlash{0%,100%{box-shadow:0 0 0 0 rgba(251,188,4,0)}40%{box-shadow:0 0 0 4px rgba(251,188,4,.45);border-color:rgba(251,188,4,.85)}}
+/* ---- #7 case file drawer ---- */
+.cf-drawer{border:1px dashed var(--outline);border-radius:var(--r-md);background:var(--surface2);margin:13px 0;font-size:13px;color:var(--text2)}
+.cf-drawer summary{cursor:pointer;padding:11px 15px;font-weight:700;color:var(--text);list-style:none;display:flex;align-items:center;gap:9px}
+.cf-drawer summary::-webkit-details-marker{display:none}
+.cf-drawer .cf-count{margin-left:auto;font:600 11px "JetBrains Mono",monospace;color:var(--blue-d);background:var(--blue-c);border:1px solid var(--outline2);padding:2px 9px;border-radius:20px}
+.cf-drawer[open] summary{border-bottom:1px solid var(--outline2)}
+.cf-items{padding:9px 15px 13px}
+.cf-items label{display:flex;gap:10px;align-items:flex-start;padding:7px 2px;cursor:pointer}
+.cf-items label:hover{color:var(--text)}
+.cf-items input{margin-top:3px;accent-color:var(--blue)}
+.cf-items .miss{color:var(--red-d)}
+.cf-items .done{color:var(--text3);text-decoration:line-through}
+/* ---- #6 report toolbar ---- */
+.rep-toolbar{display:flex;justify-content:flex-end;gap:10px;align-items:center;padding:13px 18px}
+.rep-toolbar .hint{margin-right:auto;font-size:12px;color:var(--text3)}
+/* ---- #6 print / PDF view ---- */
+@media print{
+  @page{margin:14mm}
+  #bg3d,.topbar,.tabs,.footer,.rep-toolbar,#p-overview,#p-assessment,.loupe-overlay{display:none!important}
+  body{background:#fff!important}
+  #p-results{display:block!important}
+  .card{background:#fff!important;border:1px solid #d4d9e2!important;box-shadow:none!important;backdrop-filter:none!important;page-break-inside:avoid}
+  .card h2{color:#111!important}
+  .sub,.resilience p,.cf-drawer{color:#333!important}
+  .answerkey .akbody{color:#333!important}
+  details{border-color:#d4d9e2!important}
+  .cf-drawer{background:#f7f8fa!important;border-color:#ccd2dc!important}
+  .answerkey details{background:#f7f8fa!important}
+  .score-value{color:#1a56c4!important}
+  .tier-badge{background:#fff!important;border-color:#0b6b2f!important;color:#0b6b2f!important}
+  .tier-badge.needs{border-color:#8a6100!important;color:#8a6100!important}
+  .tier-badge.not-ready{border-color:#a4231b!important;color:#a4231b!important}
+  .opt{background:#f7f8fa!important;border-color:#d4d9e2!important}
+}
 
 /* FOOTER */
 .footer{margin-top:44px;padding:18px 0;border-top:1px solid var(--outline2);font-size:12px;color:var(--text3)}
@@ -335,6 +378,7 @@ h3{font-family:"Sora",sans-serif;font-size:16px;margin:0 0 10px}
     <!-- RESULTS -->
     <section class="panel" id="p-results">
       <div class="card score-hero" id="score-hero"></div>
+      <div class="card rep-toolbar"><span class="hint">Executive report — copy or print for reviewer hand-off</span><button class="btn ghost" id="btn-copy" onclick="copySummary()">Copy summary</button><button class="btn ghost" onclick="printReport()">Print / PDF</button></div>
       <div class="card radar-container">
         <h2>Skill proficiency</h2>
         <svg id="skill-radar" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="180" cy="180" r="110" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".6"/><circle cx="180" cy="180" r="82" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".4"/><circle cx="180" cy="180" r="55" fill="none" stroke="var(--outline2)" stroke-width="1" opacity=".3"/><path id="radar-poly" class="radar-path" d="M180,180"/></svg>
