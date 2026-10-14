@@ -160,6 +160,8 @@ var idx = 0;
 var answers = {};   // sample id -> selected option index
 var revealed = {};  // sample id -> bool
 var resilience = null;
+window.particleNet = {ready:false};   // test hook: set true when the bg particle network inits
+var countUpRaf = null;                // in-flight score count-up animation handle
 
 /* ================= SKILL GRID ================= */
 (function(){
@@ -192,19 +194,86 @@ var ASSETS = {
   q3:{src:'assets/q3-telehealth.mp4', poster:'assets/q3-poster.jpg', kind:'video'},
   q4:{src:'assets/q4-casino.mp4', poster:'assets/q4-poster.jpg', kind:'video'}
 };
+function fmtTime(t){
+  if(!isFinite(t) || t < 0) t = 0;
+  var m = Math.floor(t/60), s = Math.floor(t%60);
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
 function injectAssets(s, root){
   var a = ASSETS[s.id]; if(!a) return;
   if(a.kind === 'img'){
     var m = root.querySelector('.mock-img');
     if(m) m.innerHTML = '<img src="'+a.src+'" alt="'+s.title+'" style="width:100%;height:100%;object-fit:cover;display:block">';
-  } else {
-    var scr = root.querySelector('.player .screen');
-    if(scr){
-      scr.innerHTML = '<video src="'+a.src+'" poster="'+(a.poster||'')+'" controls playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>';
-      var pc = root.querySelector('.player .play-ctrl');
-      if(pc) pc.parentNode.removeChild(pc);
-    }
+    return;
   }
+  /* ---- video: custom player (no native controls) ---- */
+  var player = root.querySelector('.player');
+  var scr = root.querySelector('.player .screen');
+  if(!player || !scr) return;
+  scr.innerHTML = '<video src="'+a.src+'" poster="'+(a.poster||'')+'" playsinline preload="auto"'
+    + (s.id === 'q3' ? ' data-semaglutide-timestamp="3.5"' : '')
+    + ' style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>';
+
+  var v = scr.querySelector('video');
+  var pbtn = player.querySelector('.play-ctrl .pbtn');
+  var track = player.querySelector('.play-ctrl .bar');
+  var thumb = player.querySelector('.play-ctrl .bar i');
+  var timeEl = player.querySelector('.play-ctrl .mono');
+
+  /* waveform: bars flow between screen and control bar (never over the video) */
+  var waveform = player.querySelector('.waveform');
+  if(!waveform){
+    waveform = document.createElement('div');
+    waveform.className = 'waveform';
+    for(var b = 0; b < 22; b++){
+      var bar = document.createElement('i');
+      bar.className = 'bar';
+      bar.style.height = (18 + Math.round(Math.abs(Math.sin(b * 1.7)) * 62)) + '%';
+      waveform.appendChild(bar);
+    }
+    player.insertBefore(waveform, player.querySelector('.play-ctrl'));
+  }
+
+  /* trigger chip (q3 only): visible solely inside the semaglutide audio window */
+  var chip = null;
+  if(s.id === 'q3'){
+    chip = document.createElement('div');
+    chip.className = 'trigger-chip';
+    chip.textContent = 'SEMAGLUTIDE';
+    scr.appendChild(chip);   // absolute inside .screen (position:relative)
+  }
+  var CHIP_IN = 3.0, CHIP_OUT = 4.0;   // illustrative mention window (see data-semaglutide-timestamp)
+  function updateChip(){
+    if(!chip) return;
+    chip.classList.toggle('show', v.currentTime >= CHIP_IN && v.currentTime <= CHIP_OUT);
+  }
+  function updateProgress(){
+    var d = (isFinite(v.duration) && v.duration) ? v.duration : 0;
+    if(thumb) thumb.style.left = (d ? (v.currentTime / d * 100) : 0) + '%';
+    if(timeEl) timeEl.textContent = fmtTime(v.currentTime) + ' / ' + fmtTime(d || v.currentTime);
+    updateChip();
+  }
+  function setPlaying(on){
+    waveform.classList.toggle('playing', on);
+    if(pbtn) pbtn.textContent = on ? '❚❚' : '▶';
+  }
+
+  if(pbtn) pbtn.onclick = function(){
+    if(v.paused){ var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+    else v.pause();
+  };
+  if(track) track.onclick = function(e){
+    var r = track.getBoundingClientRect();
+    if(isFinite(v.duration) && v.duration) v.currentTime = ((e.clientX - r.left) / r.width) * v.duration;
+  };
+  v.onplay = function(){ setPlaying(true); };
+  v.onpause = function(){ setPlaying(false); };
+  v.ontimeupdate = updateProgress;
+  v.onseeking = updateProgress;   // chip/progress track the seek target immediately
+  v.onseeked = updateProgress;
+  v.onloadedmetadata = updateProgress;
+  setPlaying(false);
+  updateProgress();
 }
 
 /* ================= WIZARD ================= */
@@ -325,18 +394,22 @@ function compute(){
 function renderResults(){
   var c = compute();
   window.lastComputed = c;
-  // Let the radar module redraw the 8-axis chart from the same scores.
+  // Let the radar module redraw the 8-axis chart from the same scores (always FINAL values).
   window.dispatchEvent(new CustomEvent('scores-updated', {detail:c}));
 
   var hero = document.getElementById('score-hero');
   var pct = c.total ? Math.round(c.earned/c.total*100) : 0;
+  var tier = pct >= 90 ? 'interview' : (pct >= 70 ? 'needs' : 'not-ready');
+  var tierText = pct >= 90 ? 'Interview-ready' : (pct >= 70 ? 'Needs review' : 'Not ready');
   hero.innerHTML =
     '<div style="text-align:center;flex:0 0 auto">'
-    +'<div style="font-size:46px;font-weight:800;font-family:Sora,sans-serif;line-height:1;color:var(--blue-d)">'+pct+'%</div>'
+    +'<div class="score-value">'+pct+'%</div>'
     +'<div style="font-size:11.5px;color:var(--text3);margin-top:5px">samples correct</div></div>'
+    +'<span class="tier-badge '+tier+'">'+tierText+'</span>'
     +'<div><h2 style="margin:0 0 6px">Assessment summary</h2>'
     +'<p class="sub" style="margin:0">'+c.done+' of '+SAMPLES.length+' samples answered · '+c.earned+'/'+c.total+' correct'
     +(c.resilientSet ? ' · resilience recorded' : ' · <b>resilience not yet recorded</b>')+'</p></div>';
+  animateScore(hero.querySelector('.score-value'), pct);
 
   var ak = document.getElementById('ak');
   ak.innerHTML = '';
@@ -349,7 +422,23 @@ function renderResults(){
   });
 }
 
-/* ================= THREE.JS BACKGROUND ================= */
+/* Score count-up: animates 0 -> target %, honours reduced-motion. */
+function animateScore(el, target){
+  if(!el) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !target){ el.textContent = target + '%'; return; }
+  if(countUpRaf) cancelAnimationFrame(countUpRaf);
+  var t0 = performance.now(), DUR = 1000;
+  (function step(now){
+    var p = Math.min(1, (now - t0) / DUR);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased) + '%';
+    if(p < 1) countUpRaf = requestAnimationFrame(step);
+    else { el.textContent = target + '%'; countUpRaf = null; }
+  })(t0);
+}
+
+/* ================= THREE.JS BACKGROUND + PARTICLE NETWORK ================= */
 (function(){
   if(typeof THREE === 'undefined'){ document.getElementById('bg3d').style.display='none'; return; }
   var canvas = document.getElementById('bg3d');
@@ -359,8 +448,9 @@ function renderResults(){
   var camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 120);
   camera.position.z = 32;
 
+  /* base starfield */
   var palette = [0x4285f4, 0xea4335, 0xfbbc04, 0x34a853, 0x8ab4ff, 0xc9a8ff, 0xffffff];
-  var N = 340;
+  var N = 72;                       // network nodes (cap: perf of O(N^2) link pass / frame)
   var pos = new Float32Array(N*3), col = new Float32Array(N*3);
   for(var i=0;i<N;i++){
     pos[i*3]   = (Math.random()-0.5)*72;
@@ -376,20 +466,66 @@ function renderResults(){
   var points = new THREE.Points(geo, mat);
   scene.add(points);
 
+  /* network links: each node connects to its nearest neighbour */
+  var linkPos = new Float32Array(N*2*3);
+  var linkGeo = new THREE.BufferGeometry();
+  linkGeo.setAttribute('position', new THREE.BufferAttribute(linkPos,3));
+  var linkMat = new THREE.LineBasicMaterial({color:0x8ab4ff, transparent:true, opacity:0.14, depthWrite:false, blending:THREE.AdditiveBlending});
+  var links = new THREE.LineSegments(linkGeo, linkMat);
+  scene.add(links);
+
+  /* soft cursor aura (nebula glow) */
+  var aura = new THREE.Mesh(
+    new THREE.SphereGeometry(3.4, 24, 24),
+    new THREE.MeshBasicMaterial({color:0x4285f4, transparent:true, opacity:0.10, blending:THREE.AdditiveBlending, depthWrite:false})
+  );
+  scene.add(aura);
+
   var mx=0, my=0;
   addEventListener('mousemove', function(e){ mx=(e.clientX/innerWidth-0.5)*2; my=(e.clientY/innerHeight-0.5)*2; });
   function resize(){ renderer.setSize(innerWidth, innerHeight); camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); }
   addEventListener('resize', resize); resize();
 
+  function updateLinks(){
+    for(var i=0;i<N;i++){
+      var xi=pos[i*3], yi=pos[i*3+1], zi=pos[i*3+2], best=-1, bd=Infinity;
+      for(var j=0;j<N;j++){
+        if(i===j) continue;
+        var dx=xi-pos[j*3], dy=yi-pos[j*3+1], dz=zi-pos[j*3+2];
+        var d=dx*dx+dy*dy+dz*dz;
+        if(d<bd){ bd=d; best=j; }
+      }
+      if(best>=0){
+        linkPos[i*6]=xi;   linkPos[i*6+1]=yi;   linkPos[i*6+2]=zi;
+        linkPos[i*6+3]=pos[best*3]; linkPos[i*6+4]=pos[best*3+1]; linkPos[i*6+5]=pos[best*3+2];
+      }
+    }
+    linkGeo.attributes.position.needsUpdate = true;
+  }
+
+  var ray = new THREE.Vector3();
   (function tick(){
     points.rotation.y += 0.0006;
     points.rotation.x += 0.00028;
     camera.position.x += (mx*3.2 - camera.position.x)*0.03;
     camera.position.y += (-my*2.2 - camera.position.y)*0.03;
     camera.lookAt(scene.position);
+
+    /* aura: unproject cursor onto the z=0 plane so the glow sits under the pointer */
+    ray.set(mx, -my, 0.5).unproject(camera).sub(camera.position).normalize();
+    if(ray.z < -0.001){
+      var t = -camera.position.z / ray.z;
+      aura.position.copy(camera.position).addScaledVector(ray, t);
+      aura.position.z = 8;
+    }
+    aura.material.opacity = 0.07 + 0.04 * Math.sin(performance.now() * 0.0016);
+
+    updateLinks();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   })();
+
+  window.particleNet.ready = true;
 })();
 
 /* ================= INIT ================= */
