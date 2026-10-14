@@ -21,10 +21,10 @@ var SAMPLES = [
     policy:'Alcohol: ads for alcoholic drinks are restricted. The policy looks at how an ad presents a product, not only at what the product is, and it does not allow ads that link drinking to social or sexual success.',
     question:'The drink is legal and contains no alcohol. What is the strongest reason this ad still needs an alcohol-policy review?',
     options:[
-      {t:'The word "forbidden" is a false claim, because nothing about a legal, alcohol-free drink is forbidden.',c:false},
-      {t:'Together, the spirits-style bottle, the whisky glass, the toasting party and the "forbidden" tagline make it look like an alcohol ad that links the drink to social success.',c:true},
-      {t:'The flavour notes "oak, smoke & midnight" describe whisky, so the ad is making a false claim about what is in the bottle.',c:false},
-      {t:'It does not need an alcohol review: "0% alcohol" is stated clearly in the headline, so viewers know it is not alcohol.',c:false}
+      {t:'The word "forbidden" is a false claim: nothing about a legal, alcohol-free drink is forbidden, so the tagline itself is the problem.',c:false},
+      {t:'Taken together, the bottle, whisky glass, toasting party and tagline look like an alcohol ad that links the drink to social success.',c:true},
+      {t:'The flavour notes "oak, smoke & midnight" describe whisky, so the ad makes a false claim about what is actually in the bottle.',c:false},
+      {t:'It does not need an alcohol review: "0% alcohol" is stated clearly in the headline, so viewers know the drink is not alcohol.',c:false}
     ],
     rationale:'Alcohol policy looks at how a product is presented, not just what is in the bottle. No single element settles this case: the drink is legal and the headline says 0%. But the bottle styling, whisky glass, toasting crowd and "forbidden" tagline together read as a spirits ad that ties the drink to social success. The flavour notes on their own are just description, and a clear "0% alcohol" label does not cancel how the whole ad looks.',
     pins:[{x:37,y:51,t:'Brand cue — bottle + mark'},{x:50,y:83,t:'"Taste the forbidden" claim'}],
@@ -53,10 +53,10 @@ var SAMPLES = [
     policy:'Misrepresentation: ads must not mislead users about who the advertiser is or what they are clicking on, and must not use design tricks to get past automated review.',
     question:'Which option lists everything in this ad that should be flagged?',
     options:[
-      {t:'Only the brand: the NIKKE name and the reworded "Just do it" slogan pass the ad off as a famous brand.',c:false},
-      {t:'Three things: the name and slogan pass the brand off as a famous one, the "Storage almost full" box imitates a phone system alert, and the small angled sale text sits at the edge where text checks may miss it.',c:true},
-      {t:'The brand and the "Storage almost full" alert. The small sale text in the corner is a design choice, not something to flag.',c:false},
-      {t:'The "Storage almost full" alert only. NIKKE is spelled differently and has its own logo, so it is a separate company and not impersonation.',c:false}
+      {t:'Only the brand: the NIKKE name and the reworded "Just do it" slogan pass the ad off as a famous brand. The rest is normal ad design.',c:false},
+      {t:'Three things: the name and slogan copy a famous brand, the "Storage almost full" box fakes a phone alert, and the sale text hides at the edge.',c:true},
+      {t:'The brand and the "Storage almost full" alert. The small sale text in the corner is a design choice, not something a reviewer flags.',c:false},
+      {t:'The "Storage almost full" alert only. NIKKE is spelled differently and has its own logo, so it counts as a separate company, not impersonation.',c:false}
     ],
     rationale:'There are three separate problems. The NIKKE name and the reworded "Just do it" slogan pass the ad off as a famous sportswear brand (impersonation), even though the logo is different. The "Storage almost full — Tap to clean now" box copies a phone system alert to trick people into tapping. The sale text is small, angled and pushed to the edge of the image, a common way to slip claims past automated text checks. A different spelling or logo does not stop it being impersonation, and calling the sale text "just design" misses why it was placed there.',
     pins:[{x:20,y:11,t:'Fake system alert'},{x:86,y:88,t:'Small text at image edge'}],
@@ -75,9 +75,9 @@ var SAMPLES = [
     policy:'Healthcare & medicines: ads may not promote prescription drugs unless the advertiser is certified to do so in that market. Review everything the ad shows and says.',
     question:'Which part of this ad breaks the healthcare policy?',
     options:[
-      {t:'The on-screen caption: "most insurance accepted" is a healthcare claim that needs proof before it can run.',c:false},
-      {t:'The voiceover: it names a prescription drug, even though nothing on screen mentions it.',c:true},
-      {t:'The doctor on screen: showing a medical professional counts as an unverified medical endorsement.',c:false},
+      {t:'The on-screen caption: "most insurance accepted" is a healthcare claim that needs proof before the ad can run.',c:false},
+      {t:'The voiceover: it names a prescription drug and offers to ship it, even though nothing on screen mentions a drug.',c:true},
+      {t:'The doctor on screen: showing a medical professional counts as an unverified medical endorsement of the service.',c:false},
       {t:'None of it. A telehealth service advertising online doctor visits is allowed, and the ad only offers a consultation.',c:false}
     ],
     rationale:'The visuals and caption are ordinary for a telehealth ad. The problem is spoken: the voiceover names semaglutide, a prescription drug, and offers to ship it to the viewer. With no certification shown, the ad is promoting a prescription drug. A reviewer who only reads the screen misses it.',
@@ -97,9 +97,9 @@ var SAMPLES = [
     question:'Look at the ad, the landing page and the certificate on file. What is the core problem?',
     options:[
       {t:'The slot-machine visuals and "JACKPOT" animation make a free game look like real gambling, and that is the main issue.',c:false},
-      {t:'The certificate covers only luckyspin-play.net, but its "Play for real money" link sends users to luckyspin-casino.com, which is not covered.',c:true},
-      {t:'The "FREE TO PLAY • NO DEPOSIT" caption has no age-restriction notice, and that is the main issue.',c:false},
-      {t:'There is no core problem: the advertiser holds a gambling certificate, so the ad and its links are covered.',c:false}
+      {t:'The "Play for real money" link sends users to luckyspin-casino.com, a site the certificate on file does not cover.',c:true},
+      {t:'The "FREE TO PLAY • NO DEPOSIT" caption has no age-restriction notice, and that missing notice is the main issue here.',c:false},
+      {t:'There is no core problem: the advertiser holds a gambling certificate, so the ad and everything it links to are covered.',c:false}
     ],
     rationale:'The certified page looks fine on its own, and the ad sends people there. The issue is the next click: "Play for real money" leads to luckyspin-casino.com, which the certificate does not cover. The "win real cash" voiceover is also misleading for a "free" game, and it is the clue that should send you looking for the real-money path. The visuals and a missing age notice are secondary; the uncovered real-money site decides the case, and it suggests the free page is being used to get round certification.',
     secondary:{label:'Self-check — what next?', model:'Disapprove the ad for sending users to an uncertified real-money site, AND escalate the account for review. A missing certificate on its own would be fixed with guidance to the advertiser; a free page that hands users on to an uncertified real-money site looks deliberate, so it goes up.'},
@@ -118,15 +118,14 @@ var SAMPLES = [
     policy:'Misrepresentation & healthcare: ads must not make unapproved medical claims, and must not use fake or misleading endorsements, including AI-generated people.',
     question:'Which policy issues are present?',
     options:[
-      {t:'Only the price: "Claim 80% off" is an unverified discount claim that needs proof.',c:false},
-      {t:'It claims a supplement works like a prescription drug, and it uses an AI-generated "doctor" as an endorser. A fine-print label does not make a fake endorsement acceptable.',c:true},
-      {t:'Only the drug comparison. The AI presenter is labelled in the fine print, so the endorsement is acceptable.',c:false},
+      {t:'Only the price: "Claim 80% off" is an unverified discount claim, and the advertiser would need to prove the original price.',c:false},
+      {t:'Both: it claims to work like a prescription drug, and its AI-generated "doctor" is a fake endorsement, label or not.',c:true},
+      {t:'Only the drug comparison. The AI presenter is labelled in the fine print, so the endorsement itself is acceptable.',c:false},
       {t:'Only the endorsement. Saying it "works like" a prescription drug is a comparison, not a medical claim, so it is allowed.',c:false}
     ],
     rationale:'There are two issues. Saying a supplement "works like Rx weight-loss medication" is an unapproved medical claim: a comparison to a drug is still a drug claim. And "Dr. Marcus Reed" is an AI-generated person presented as a real doctor recommending the product. The fine-print label does not fix that, because the headline still has him talking about "my patients". Catching only one of the two leaves a violating ad live.',
     secondary:{label:'Self-check — draft the advertiser reply', model:'"Your ad was disapproved because it (1) claims Rejuvacell works like a prescription medication without authorization, and (2) presents an AI-generated \'doctor\' as a real endorser, which is impersonation. To run, remove the drug-equivalence claim and the fake-doctor endorsement." — name what is missing, cite the policy, give the fix.'},
     pins:[{x:50,y:40,t:'Drug-equivalence claim'},{x:50,y:84,t:'AI presenter as endorser'}],
-    evidence:['Ad copy + screenshot archived','Endorser marked as AI-generated in file','No certification attached for the prescription-drug claim','Account history / prior violations checked'],
     render:'<div class="adcard">'
       +'<img src="assets/q5-doctor.png" alt="AI-generated doctor endorser" style="width:100%;max-width:280px;aspect-ratio:16/9;border-radius:14px;object-fit:cover;display:block;margin-bottom:12px;border:1px solid #e8eaed">'
       +'<div style="font-size:18px;font-weight:700">My patients are shocked — it works like a prescription drug.</div>'
@@ -142,15 +141,14 @@ var SAMPLES = [
     policy:'Misrepresentation: ads must be honest about pricing and must clearly show the key terms of any "free" offer.',
     question:'The headline promises 30 days free. Based on the ad alone, what is the main violation?',
     options:[
-      {t:'"No risk" is the main violation: the advertiser cannot promise that a subscription carries zero risk.',c:false},
-      {t:'A key cost is missing: the fine print says the trial turns into a paid monthly plan, but the ad never says how much it costs.',c:true},
-      {t:'"Cancel anytime" is the main violation, because the ad does not show how to cancel.',c:false},
-      {t:'There is no violation: the fine print clearly says the plan renews automatically, which is enough disclosure.',c:false}
+      {t:'"No risk" is the main violation: the advertiser cannot promise that a paid subscription carries zero risk for the user.',c:false},
+      {t:'A key cost is missing: the fine print says the trial becomes a paid monthly plan but never says what that plan costs.',c:true},
+      {t:'"Cancel anytime" is the main violation, because the ad promises easy cancellation but does not show how to cancel.',c:false},
+      {t:'There is no violation: the fine print clearly says the plan renews automatically, which counts as enough disclosure.',c:false}
     ],
     rationale:'The fine print says the plan renews, but not what it costs, and the price is the term users most need to know. "No risk" and "cancel anytime" are soft claims worth noting, but the missing monthly price is what makes the "free" offer misleading. Saying a plan renews is not the same as saying what it costs.',
     secondary:{label:'Self-check — what do you do next?', model:'The problem in the ad is clear: no monthly price appears anywhere. Disapprove with guidance to add the price, and request the landing-page screenshot that is missing from the file. If the landing page also hides the charge, treat it as a pattern and escalate. If the page shows the price clearly, the fix is only the ad copy, so say that in your reply.'},
     pins:[{x:50,y:76,t:'Recurring price never disclosed'}],
-    evidence:['Ad copy archived in file','Landing-page screenshot — MISSING: request it','Check whether the landing page shows the monthly price','Advertiser response logged'],
     render:'<div class="adcard">'
       +'<div style="font-size:18px;font-weight:700">Try ProFree — 30 days FREE. No risk, cancel anytime.</div>'
       +'<div class="cta">Start free trial</div>'
