@@ -144,7 +144,7 @@ var SAMPLES = [
     question:'The headline promises 30 days free. Based on the creative alone, what is the primary violation?',
     options:[
       {t:'The price itself is simply too high for this product category, which is a fairness judgment rather than a violation.',c:false},
-      {t:'A material cost is missing — the ad never states the recurring price after the free period, and "free" offers must disclose material terms clearly.',c:true},
+      {t:'A material cost is missing — the fine print admits the subscription renews at a monthly rate, but the ad never states what that rate is.',c:true},
       {t:'The 30-day free trial itself is prohibited outright, because every trial that auto-renews into a paid subscription violates advertising rules in all markets.',c:false},
       {t:'The cancel-anytime reassurance is missing a step-by-step cancellation tutorial, which subscription advertisements are required to include in the creative itself.',c:false}
     ],
@@ -155,7 +155,7 @@ var SAMPLES = [
     render:'<div class="adcard">'
       +'<div style="font-size:18px;font-weight:700">Try ProFree — 30 days FREE. No risk, cancel anytime.</div>'
       +'<div class="cta">Start free trial</div>'
-      +'<div class="fine">After the trial, subscriptions renew automatically. Billing terms apply. Cancel anytime.</div>'
+      +'<div class="fine">After the free trial, your subscription renews automatically at the regular monthly rate — cancel anytime to avoid being charged.</div>'
       +'<div class="url">www.profree.example</div>'
       +'</div>'
   }
